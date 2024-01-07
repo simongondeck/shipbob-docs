@@ -1,8 +1,8 @@
 {
     "name": "ShipBob",
     "logo": {
-      "light": "/logo/light.png",
-      "dark": "/logo/dark.png"
+      "light": "/logo/logo-sb.svg",
+      "dark": "/logo/dark.svg"
     },
     "favicon": "/favicon.png",
     "colors": {
@@ -10,13 +10,31 @@
       "light": "#457CFE",
       "dark": "#175cff"
     },
-    "topbarLinks": {
+    "topbarCtaButton": {
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
     },
+    "tabs": [
+        {
+            "name": "API Reference",
+            "url": "api-reference"
+        }
+    ],
+    "anchors": [],
     "navigation": [
         {
             "group": "Guides",
+
+    
+        
+          
+    
+
+        
+        Expand All
+    
+    @@ -47,15 +31,6 @@
+  
             "pages": [
               "introdution",
               "quickstart",
@@ -27,6 +45,23 @@
         {
             "group": "Channels",
             "pages": [
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -154,8 +129,6 @@
+  
               "api-reference/channels/get-user-authorized-channel-info"
             ]
           },
