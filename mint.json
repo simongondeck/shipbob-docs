@@ -154,8 +154,7 @@
       },
     "feedback":
       {
-          "thumbsRating": true,
-          "raiseIssue": true
+          "thumbsRating": true
       }
   }
 
