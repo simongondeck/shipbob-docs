@@ -1,8 +1,8 @@
 {
     "name": "ShipBob",
     "logo": {
-      "light": "/logo/logo-sb.svg",
-      "dark": "/logo/dark.svg"
+      "light": "/logo/light.png",
+      "dark": "/logo/dark.png"
     },
     "favicon": "/favicon.png",
     "colors": {
@@ -24,17 +24,6 @@
     "navigation": [
         {
             "group": "Guides",
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -47,15 +31,6 @@
-  
             "pages": [
               "introdution",
               "quickstart",
@@ -45,23 +34,6 @@
         {
             "group": "Channels",
             "pages": [
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -154,8 +129,6 @@
-  
               "api-reference/channels/get-user-authorized-channel-info"
             ]
           },
