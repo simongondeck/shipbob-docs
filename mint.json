@@ -14,11 +14,20 @@
     "anchors": [],
     "navigation": [
         {
+            "group": "API Reference",
+            "pages": [
+                "quickstart",
+                {
+                    "group": "Channel",
+                    "pages": ["quickstart"]
+                }
+            ]
+        },
+        {
             "group": "Guides",
             "pages": [
               "introdution",
               "quickstart",
-              "authentication",
               "webhooks"
             ]
         },
