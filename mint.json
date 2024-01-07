@@ -10,16 +10,11 @@
       "light": "#457CFE",
       "dark": "#175cff"
     },
-    "topbarCtaButton": {
+    "topbarLinks": {
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
     },
-    "tabs": [
-        {
-            "name": "API Reference",
-            "url": "api-reference"
-        }
-    ],
+    "tabs": [],
     "anchors": [],
     "navigation": [
         {
