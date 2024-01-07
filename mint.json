@@ -1,7 +1,7 @@
 {
     "name": "ShipBob",
     "logo": {
-      "light": "/logo/sb-logo.svg",
+      "light": "/logo/logo-sb.svg",
       "dark": "/logo/dark.svg"
     },
     "favicon": "/favicon.png",
@@ -156,7 +156,7 @@
       {
           "thumbsRating": true,
           "suggestEdit": true,
-          "raiseIssue": true
+          "thumbsRating": true
       }
   }
 
