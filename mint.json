@@ -155,8 +155,7 @@
     "feedback":
       {
           "thumbsRating": true,
-          "suggestEdit": true,
-          "thumbsRating": true
+          "raiseIssue": true
       }
   }
 
