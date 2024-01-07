@@ -16,7 +16,6 @@
         {
             "group": "API Reference",
             "pages": [
-                "quickstart",
                 {
                     "group": "Channel",
                     "pages": ["quickstart"]
