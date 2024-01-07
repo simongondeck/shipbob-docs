@@ -61,8 +61,7 @@
                     "api-reference/orders/get-logs-for-one-shipment-by-shipment-id",
                     "api-reference/orders/get-shipping-methods"
                   ]
-                },
-
+                }
             ]
         },
           {
