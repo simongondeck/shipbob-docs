@@ -30,44 +30,45 @@
                     "pages": [
                       "api-reference/channels/get-user-authorized-channel-info"
                     ]
-                }
+                },
+                {
+                  "group": "Inventory",
+                  "pages": [
+                    "api-reference/inventory/get-an-inventory-item",
+                    "api-reference/inventory/list-inventory-items",
+                    "api-reference/inventory/get-a-list-of-inventory-items-by-product-id"
+                  ]
+                },
+                {
+                  "group": "Orders",
+                  "pages": [
+                    "api-reference/orders/estimate-fulfillment-cost-for-order",
+                    "api-reference/orders/get-order",
+                    "api-reference/orders/get-orders",
+                    "api-reference/orders/create-order",
+                    "api-reference/orders/cancel-single-order-by-order-id",
+                    "api-reference/orders/get-order-store-json",
+                    "api-reference/orders/save-the-store-order-json",
+                    "api-reference/orders/get-one-shipment-by-order-id-and-shipment-id",
+                    "api-reference/orders/cancel-one-shipment-by-order-id-and-shipment-id",
+                    "api-reference/orders/get-one-shipments-status-timeline-by-order-id-and-shipment-id",
+                    "api-reference/orders/get-all-shipments-for-order",
+                    "api-reference/orders/get-logs-for-one-shipment-by-order-id-and-shipment-id",
+                    "api-reference/orders/get-one-shipment-by-shipment-id",
+                    "api-reference/orders/cancel-one-shipment-by-shipment-id",
+                    "api-reference/orders/cancel-multiple-shipments-by-shipment-id",
+                    "api-reference/orders/get-one-shipments-status-timeline-by-shipment-id",
+                    "api-reference/orders/get-logs-for-one-shipment-by-shipment-id",
+                    "api-reference/orders/get-shipping-methods"
+                  ]
+                },
+
             ]
         },
-        {
+          {
             "group": "Channels",
             "pages": [
               "api-reference/channels/get-user-authorized-channel-info"
-            ]
-          },
-          {
-            "group": "Inventory",
-            "pages": [
-              "api-reference/inventory/get-an-inventory-item",
-              "api-reference/inventory/list-inventory-items",
-              "api-reference/inventory/get-a-list-of-inventory-items-by-product-id"
-            ]
-          },
-          {
-            "group": "Orders",
-            "pages": [
-              "api-reference/orders/estimate-fulfillment-cost-for-order",
-              "api-reference/orders/get-order",
-              "api-reference/orders/get-orders",
-              "api-reference/orders/create-order",
-              "api-reference/orders/cancel-single-order-by-order-id",
-              "api-reference/orders/get-order-store-json",
-              "api-reference/orders/save-the-store-order-json",
-              "api-reference/orders/get-one-shipment-by-order-id-and-shipment-id",
-              "api-reference/orders/cancel-one-shipment-by-order-id-and-shipment-id",
-              "api-reference/orders/get-one-shipments-status-timeline-by-order-id-and-shipment-id",
-              "api-reference/orders/get-all-shipments-for-order",
-              "api-reference/orders/get-logs-for-one-shipment-by-order-id-and-shipment-id",
-              "api-reference/orders/get-one-shipment-by-shipment-id",
-              "api-reference/orders/cancel-one-shipment-by-shipment-id",
-              "api-reference/orders/cancel-multiple-shipments-by-shipment-id",
-              "api-reference/orders/get-one-shipments-status-timeline-by-shipment-id",
-              "api-reference/orders/get-logs-for-one-shipment-by-shipment-id",
-              "api-reference/orders/get-shipping-methods"
             ]
           },
           {
