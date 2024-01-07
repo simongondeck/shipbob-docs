@@ -15,10 +15,7 @@
       "url": "https://web.shipbob.com/app/merchant/"
     },
     "tabs": [
-        {
-            "name": "API Reference",
-            "url": "api-reference"
-        }
+
     ],
     "anchors": [],
     "navigation": [
