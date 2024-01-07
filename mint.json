@@ -1,8 +1,8 @@
 {
     "name": "ShipBob",
     "logo": {
-      "light": "/logo/dark.svg",
-      "dark": "/logo/dark.svg"
+      "light": "/logo/light.png",
+      "dark": "/logo/dark.png"
     },
     "favicon": "/favicon.png",
     "colors": {
