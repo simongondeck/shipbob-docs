@@ -28,7 +28,7 @@
         },
         {
             "group": "API Reference",
-            "pages": ["api-reference/channels/get-user-authorized-channel-info"]
+            "pages": ["api-reference/channels"]
         },
         {
             "group": "Channels",
