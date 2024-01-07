@@ -10,10 +10,6 @@
       "light": "#457CFE",
       "dark": "#175cff"
     },
-    "topbarLinks": {
-      "name": "Log In",
-      "url": "https://web.shipbob.com/app/merchant/"
-    },
     "tabs": [],
     "anchors": [],
     "navigation": [
