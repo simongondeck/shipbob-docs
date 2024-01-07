@@ -12,14 +12,14 @@
     },
     "topbarCtaButton": {
       "name": "Log In",
-      "url": "https://web.shipbob.com/app/merchant/?_gl=1*156mjhe*_ga*NzQ0NTEzNzU1LjE3MDE3NDExNDY.*_ga_2F14T0KJFW*MTcwMTc0MTE0NS4xLjEuMTcwMTc0MTI1NS4yMi4wLjA.#/login"
+      "url": "https://web.shipbob.com/app/merchant/"
     },
-    "topbarLinks": [
-      {
-        "name": "Support",
-        "url": "https://support.shipbob.com/s/?_gl=1*17ez306*_ga*NzQ0NTEzNzU1LjE3MDE3NDExNDY.*_ga_2F14T0KJFW*MTcwMTc0MTE0NS4xLjEuMTcwMTc0MTQwMS42MC4wLjA."
-      }
-    ],
+    // "topbarLinks": [
+    //   {
+    //     "name": "Login",
+    //     "url": "https://support.shipbob.com/s/?_gl=1*17ez306*_ga*NzQ0NTEzNzU1LjE3MDE3NDExNDY.*_ga_2F14T0KJFW*MTcwMTc0MTE0NS4xLjEuMTcwMTc0MTQwMS42MC4wLjA."
+    //   }
+    // ],
     "tabs": [
         {
             "name": "API Reference",
@@ -28,26 +28,29 @@
     ],
     "anchors": [
       {
-        "name": "Request a Quote",
+        "name": "Docs",
         "icon": "list-timeline",
-        "url": "https://www.shipbob.com/quote/"
+        "url": "https://shipbob.mintlify.app/"
       },
       {
-        "name": "Integrations",
+        "name": "API Reference",
         "icon": "code-branch",
-        "url": "https://www.shipbob.com/partners/"
+        "url": "https://shipbob.mintlify.app/api-reference/"
       },
       {
-        "name": "Blog",
-        "icon": "newspaper",
-        "url": "https://support.shipbob.com/s/?_gl=1*1eya219*_ga*NzQ0NTEzNzU1LjE3MDE3NDExNDY.*_ga_2F14T0KJFW*MTcwMTc0MTE0NS4xLjEuMTcwMTc0MTQzNi4yNS4wLjA."
+        "name": "Contact Us",
+        "icon": "bell",
+        "url": "mailto:support@shipbob.com"
       }
     ],
     "navigation": [
         {
-            "group": "About Our APIs",
+            "group": "Guides",
             "pages": [
-              "introdution"
+              "introdution",
+              "quickstart",
+              "authentication",
+              "webhooks"
             ]
         },
         {
