@@ -7,3 +7,16 @@ With a distributed network of fulfillment centers across the US, we allow fast, 
 
 There are two methods of using this API: a "Personal Access Token (PAT)" for single-merchant or custom integrations, and an OAuth 2.0 process for general-purpose integrations or those that will be listed on ShipBob's App Marketplace. Please see the Auth tab for more details.
 
+## API Access
+
+Before you are able to interact with ShipBob's API, you must have an account. Accounts are free until physical inventory arrives, and the trial period does not expire.
+
+## Support & Rate Limits
+If you have questions, please email our Developer Support Team at developers@shipbob.com. This will create a ticket with a 1-business day first response time.
+
+API calls will be rate-limited to 150 requests per-minute using a sliding window, and will be totalled per user, per application across calls to any of the Shipbob APIs.
+
+## Terminology & Concepts
+A channel is a specific installation of an application built by a vendor on top of our API – e.g. “Kevin’s Shopify Store #133432” would be 1 channel
+A multi-channel application can read data from all channels that belong to the merchant but can only write data on behalf of its own channel - e.g. multi-channel "app #555" can read data from "Kevin's Shopify Store #133432" but can only write data on behalf of "app #555".
+
