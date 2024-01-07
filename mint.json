@@ -27,24 +27,20 @@
             ]
         },
         {
-            "group": "API Reference",
-            "pages": ["api-reference/channels"]
-        },
-        {
             "group": "Channels",
             "pages": [
               "api-reference/channels/get-user-authorized-channel-info"
             ]
-        },
-        {
+          },
+          {
             "group": "Inventory",
             "pages": [
               "api-reference/inventory/get-an-inventory-item",
               "api-reference/inventory/list-inventory-items",
               "api-reference/inventory/get-a-list-of-inventory-items-by-product-id"
             ]
-        },
-        {
+          },
+          {
             "group": "Orders",
             "pages": [
               "api-reference/orders/estimate-fulfillment-cost-for-order",
@@ -119,6 +115,7 @@
               "api-reference/locations/get-locations"
             ]
           }
+        }
     ],
     "footerSocials":
       {
