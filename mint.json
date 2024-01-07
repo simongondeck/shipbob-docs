@@ -10,7 +10,7 @@
       "light": "#457CFE",
       "dark": "#175cff"
     },
-    "topbarCtaButton": {
+    "topbarLinks": {
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
     },
@@ -26,7 +26,9 @@
               "webhooks"
             ]
         },
-        {
+        { 
+          "group": "API Reference",
+          {
             "group": "Channels",
             "pages": [
               "api-reference/channels/get-user-authorized-channel-info"
@@ -115,6 +117,8 @@
               "api-reference/locations/get-locations"
             ]
           }
+        }
+      }
     ],
     "footerSocials":
       {
