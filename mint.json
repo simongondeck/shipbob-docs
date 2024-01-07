@@ -61,67 +61,61 @@
                     "api-reference/orders/get-logs-for-one-shipment-by-shipment-id",
                     "api-reference/orders/get-shipping-methods"
                   ]
+                },
+                {
+                  "group": "Products",
+                  "pages": [
+                    "api-reference/products/get-multiple-products",
+                    "api-reference/products/add-a-single-product-to-the-store",
+                    "api-reference/products/get-a-single-product",
+                    "api-reference/products/modify-a-single-product",
+                    "api-reference/products/add-multiple-products-to-the-store"
+                  ]
+                },
+                {
+                  "group": "Receiving",
+                  "pages": [
+                    "api-reference/receiving/get-fulfillment-centers",
+                    "api-reference/receiving/get-warehouse-receiving-order",
+                    "api-reference/receiving/get-warehouse-receiving-order-boxes",
+                    "api-reference/receiving/get-multiple-warehouse-receiving-orders",
+                    "api-reference/receiving/create-warehouse-receiving-order",
+                    "api-reference/receiving/get-warehouse-receiving-order-box-labels",
+                    "api-reference/receiving/cancel-warehouse-receiving-order",
+                    "api-reference/receiving/get-warehouse-receiving-order-deprecated",
+                    "api-reference/receiving/get-a-warehouse-receiving-order-by-purchase-order-number-deprecated",
+                    "api-reference/receiving/create-warehouse-receiving-order-deprecated",
+                    "api-reference/receiving/get-warehouse-receiving-order-box-labels-deprecated",
+                    "api-reference/receiving/cancel-warehouse-receiving-order-deprecated"
+                  ]
+                },
+                {
+                  "group": "Returns",
+                  "pages": [
+                    "api-reference/returns/get-return-order",
+                    "api-reference/returns/modify-return-order",
+                    "api-reference/returns/get-return-orders",
+                    "api-reference/returns/create-return-order",
+                    "api-reference/returns/cancel-return-order",
+                    "api-reference/returns/get-one-returns-status-history"
+                  ]
+                },
+                {
+                  "group": "Webhooks",
+                  "pages": [
+                    "api-reference/webhooks/get-webhooks",
+                    "api-reference/webhooks/create-a-new-webhook-subscription",
+                    "api-reference/webhooks/delete-an-existing-webhook-subscription"
+                  ]
+                },
+                {
+                  "group": "Locations",
+                  "pages": [
+                    "api-reference/locations/get-locations"
+                  ]
                 }
             ]
-        },
-          {
-            "group": "Channels",
-            "pages": [
-              "api-reference/channels/get-user-authorized-channel-info"
-            ]
-          },
-          {
-            "group": "Products",
-            "pages": [
-              "api-reference/products/get-multiple-products",
-              "api-reference/products/add-a-single-product-to-the-store",
-              "api-reference/products/get-a-single-product",
-              "api-reference/products/modify-a-single-product",
-              "api-reference/products/add-multiple-products-to-the-store"
-            ]
-          },
-          {
-            "group": "Receiving",
-            "pages": [
-              "api-reference/receiving/get-fulfillment-centers",
-              "api-reference/receiving/get-warehouse-receiving-order",
-              "api-reference/receiving/get-warehouse-receiving-order-boxes",
-              "api-reference/receiving/get-multiple-warehouse-receiving-orders",
-              "api-reference/receiving/create-warehouse-receiving-order",
-              "api-reference/receiving/get-warehouse-receiving-order-box-labels",
-              "api-reference/receiving/cancel-warehouse-receiving-order",
-              "api-reference/receiving/get-warehouse-receiving-order-deprecated",
-              "api-reference/receiving/get-a-warehouse-receiving-order-by-purchase-order-number-deprecated",
-              "api-reference/receiving/create-warehouse-receiving-order-deprecated",
-              "api-reference/receiving/get-warehouse-receiving-order-box-labels-deprecated",
-              "api-reference/receiving/cancel-warehouse-receiving-order-deprecated"
-            ]
-          },
-          {
-            "group": "Returns",
-            "pages": [
-              "api-reference/returns/get-return-order",
-              "api-reference/returns/modify-return-order",
-              "api-reference/returns/get-return-orders",
-              "api-reference/returns/create-return-order",
-              "api-reference/returns/cancel-return-order",
-              "api-reference/returns/get-one-returns-status-history"
-            ]
-          },
-          {
-            "group": "Webhooks",
-            "pages": [
-              "api-reference/webhooks/get-webhooks",
-              "api-reference/webhooks/create-a-new-webhook-subscription",
-              "api-reference/webhooks/delete-an-existing-webhook-subscription"
-            ]
-          },
-          {
-            "group": "Locations",
-            "pages": [
-              "api-reference/locations/get-locations"
-            ]
-          }
+        }
     ],
     "footerSocials":
       {
