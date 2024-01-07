@@ -14,20 +14,23 @@
     "anchors": [],
     "navigation": [
         {
-            "group": "API Reference",
-            "pages": [
-                {
-                    "group": "Channel",
-                    "pages": ["quickstart"]
-                }
-            ]
-        },
-        {
             "group": "Guides",
             "pages": [
               "introdution",
               "quickstart",
+              "authentication",
               "webhooks"
+            ]
+        },
+        {
+            "group": "API Reference",
+            "pages": [
+                {
+                    "group": "Channels",
+                    "pages": [
+                      "api-reference/channels/get-user-authorized-channel-info"
+                    ]
+                }
             ]
         },
         {
