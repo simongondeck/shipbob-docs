@@ -20,35 +20,10 @@
             "url": "api-reference"
         }
     ],
-    "anchors": [
-      {
-        "name": "Docs",
-        "icon": "list-timeline",
-        "url": "https://shipbob.mintlify.app/"
-      },
-      {
-        "name": "API Reference",
-        "icon": "code-branch",
-        "url": "https://shipbob.mintlify.app/api-reference/"
-      },
-      {
-        "name": "Contact Us",
-        "icon": "bell",
-        "url": "mailto:support@shipbob.com"
-      }
-    ],
+    "anchors": [],
     "navigation": [
         {
             "group": "Guides",
-            "pages": [
-              "introdution",
-              "quickstart",
-              "authentication",
-              "webhooks"
-            ]
-        },
-        {
-            "group": "API Reference",
             "pages": [
               "introdution",
               "quickstart",
@@ -154,8 +129,6 @@
       },
     "feedback":
       {
-          "thumbsRating": true,
-          "suggestEdit": true,
           "thumbsRating": true
       }
   }
