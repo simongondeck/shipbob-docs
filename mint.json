@@ -1,8 +1,8 @@
 {
     "name": "ShipBob",
     "logo": {
-      "light": "/logo/logo-sb.svg",
-      "dark": "/logo/dark.svg"
+      "light": "/logo/light.png",
+      "dark": "/logo/dark.png"
     },
     "favicon": "/favicon.png",
     "colors": {
@@ -14,13 +14,6 @@
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
     },
-    "tabs": [
-        {
-            "name": "API Reference",
-            "url": "api-reference"
-        }
-    ],
-    "anchors": [],
     "navigation": [
         {
             "group": "Guides",
@@ -129,6 +122,6 @@
       },
     "feedback":
       {
-          "thumbsRating": true,
+          "thumbsRating": true
       }
   }
