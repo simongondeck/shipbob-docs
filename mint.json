@@ -119,10 +119,10 @@
             ]
         }
     ],
-    "topbarLinks": [
+    "topbarLinks": {
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
-    ],
+    },
     "footerSocials":
       {
           "linkedin": "https://www.linkedin.com/company/shipbob-inc-/",
