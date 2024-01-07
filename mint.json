@@ -14,23 +14,6 @@
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
     },
-    "anchors": [
-      {
-        "name": "Docs",
-        "icon": "list-timeline",
-        "url": "https://shipbob.mintlify.app/"
-      },
-      {
-        "name": "API Reference",
-        "icon": "code-branch",
-        "url": "https://shipbob.mintlify.app/api-reference/"
-      },
-      {
-        "name": "Contact Us",
-        "icon": "bell",
-        "url": "mailto:support@shipbob.com"
-      }
-    ],
     "navigation": [
         {
             "group": "Guides",
@@ -45,9 +28,18 @@
             "group": "API Reference",
             "pages": [
               "introdution",
-              "quickstart",
               "authentication",
               "webhooks"
+            ]
+        },
+        {
+            "group": "API Reference",
+            "pages": [
+                "quickstart",
+                {
+                    "group": "Nested Reference Pages",
+                    "pages": ["nested-reference-page"]
+                }
             ]
         },
         {
@@ -150,7 +142,7 @@
       {
           "thumbsRating": true
       }
-  }
+}
 
 
 
