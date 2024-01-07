@@ -48,6 +48,15 @@
             ]
         },
         {
+            "group": "API Reference",
+            "pages": [
+              "introdution",
+              "quickstart",
+              "authentication",
+              "webhooks"
+            ]
+        },
+        {
             "group": "Channels",
             "pages": [
               "api-reference/channels/get-user-authorized-channel-info"
@@ -147,7 +156,7 @@
       {
           "thumbsRating": true,
           "suggestEdit": true,
-          "thumbsRating": true
+          "raiseIssue": true
       }
   }
 
