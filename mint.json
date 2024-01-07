@@ -14,7 +14,12 @@
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
     },
-    "tabs": [],
+    "tabs": [
+        {
+            "name": "API Reference",
+            "url": "api-reference"
+        }
+    ],
     "anchors": [],
     "navigation": [
         {
