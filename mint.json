@@ -14,12 +14,6 @@
       "name": "Log In",
       "url": "https://web.shipbob.com/app/merchant/"
     },
-    // "topbarLinks": [
-    //   {
-    //     "name": "Login",
-    //     "url": "https://support.shipbob.com/s/?_gl=1*17ez306*_ga*NzQ0NTEzNzU1LjE3MDE3NDExNDY.*_ga_2F14T0KJFW*MTcwMTc0MTE0NS4xLjEuMTcwMTc0MTQwMS42MC4wLjA."
-    //   }
-    // ],
     "tabs": [
         {
             "name": "API Reference",
@@ -153,7 +147,7 @@
       {
           "thumbsRating": true,
           "suggestEdit": true,
-          "raiseIssue": true
+          "thumbsRating": true
       }
   }
 
