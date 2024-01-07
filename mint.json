@@ -19,6 +19,8 @@
               "introdution",
               "quickstart",
               "authentication",
+              "sandbox",
+              "errors",
               "webhooks"
             ]
         },
