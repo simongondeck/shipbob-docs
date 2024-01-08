@@ -17,6 +17,92 @@ If you have questions, please email our Developer Support Team at developers@shi
 API calls will be rate-limited to 150 requests per-minute using a sliding window, and will be totalled per user, per application across calls to any of the Shipbob APIs.
 
 ## Terminology & Concepts
-A channel is a specific installation of an application built by a vendor on top of our API – e.g. “Kevin’s Shopify Store #133432” would be 1 channel
-A multi-channel application can read data from all channels that belong to the merchant but can only write data on behalf of its own channel - e.g. multi-channel "app #555" can read data from "Kevin's Shopify Store #133432" but can only write data on behalf of "app #555".
+- A **channel** is a specific installation of an application built by a vendor on top of our API – e.g. “Kevin’s Shopify Store #133432” would be 1 channel
+- A **multi-channel** application can read data from all channels that belong to the merchant but can only write data on behalf of its own channel - e.g. multi-channel "app #555" can read data from "Kevin's Shopify Store #133432" but can only write data on behalf of "app #555".
+- A **reference id** is a required field when creating a record using one of Shipbobs Post endpoints - e.g. when creating a product via the Post products endpoint, a product reference id is required. The reference id was created to allow developers to tie records in ShipBob to their own upstream systems. Reference ids must be unique by channel.
+- An **order** is an object that comes from an external source and is intended for ShipBob to fulfill.
+- A **shipment** is an object that is the result of fulfillment of an order. An order can contain one or more shipments.
+- A **product (or channel product)** is a virtual record created in ShipBob’s system via a channel. In order to fulfill orders, product records MUST be created in ShipBob’s system. Upon creating a product, ShipBob will automatically 1 matching inventory item for that product. Via our UI, users can then add more inventory items to point to that product in order to create bundles
+- An **inventory** item is a representation of a physical good, that may or may not have physical stock in ShipBob’s fulfillment center. An inventory item can be related to multiple products (e.g. a merge, where multiple product records come from various channel sources but are actually the same physical good).
+- A **bundle** is a product that resolves to multiple inventory items. This is most commonly used for gift or multi packs. When an order is received for this product, the shipment will contain all the inventory items associated with the bundle. Note: this can currently only be done from the ShipBob UI
+- A **merge** is a situation where multiple products (that may be from different channels) resolve to one inventory item. This is most common when merchants use ShipBob to fulfill orders from multiple platforms (e.g. Shopify and Amazon). When an order containing any of these products is sent to ShipBob, a shipment containing that inventory item will be sent out. Note: this can currently only be done from the ShipBob UI
+- A **warehouse receiving order (WRO)** is an order to receive inventory into ShipBob’s fulfillment center. Some other solutions call this an “ASN” or Advanced Ship Notice. WROs may contain or multiple inventory items with specific quantities.
+- A **return** is an order to unpack returned inventory and restock, dispose, or quarantine it in ShipBob’s fulfillment center. This is the same thing as an "RMA". Returns can be optionally related to the original outbound shipment.
+
+## Status Reference
+A common use case of ShipBob's API includes filtering orders, shipments, returns, or WROs by status. Here you will find the valid statuses by resource.
+
+### Shipment Statuses
+Shipment statuses reflect what is happening in the physical world with the package. There is an additional "status detail" section with more detailed information that is also available in our ShipBob Merchant Application.
+
+- **Exception**: the shipment cannot be fulfilled due to an out of stock or inactive product.
+- **On Hold**: the shipment is not ready for fulfillment, even if there is stock available. Common reasons are: merchant manually placed on hold, missing tarriff codes on international orders, or bad credit card information.
+- **Processing**: the shipment is in the process of fulfillment.
+- **Completed**: the shipment has been fulfilled, i.e. it has left ShipBob. This does not mean it has been delivered by the carrier.
+- **Cancelled**: the shipment has been cancelled and will not be fulfilled.
+
+The most important statuses and status details are listed here:
+
+| Shipment Status      | Status Detail Name |
+| ---------------------| ------------------ |
+| Processing           | Picked      |
+| Processing           | Packed      |
+| Processing           | Labeled     |
+| Completed            | InTransit   |
+| Completed            | Delivered       |
+| Completed            | DeliveryException        |
+| Exception           | OutOfStock      |
+| Exception           | UnknownSku      |
+| Exception           | InactiveSku     |
+| On Hold           | PaymentDeclined      |
+| On Hold           | MissingTarriffInformation      |
+| On Hold           | Manual     |
+| On Hold           | InvalidAddress      |
+| On Hold           | AutoProcessingPause      |
+| Cancelled           | Cancelled     |
+
+### Order Statuses
+Orders can have 1 or many shipments (if the contents will not fit in 1 box, for example). Order statuses are imputed from the statuses of the underlying shipments.
+
+| Shipment 1 Status | Shipment n Status | Order Status
+| ----------- | ----------- | -----------
+| Processing  |        | Processing
+| Exception   |        | Exception
+| On Hold   |        | On Hold
+| Completed   |        | Completed
+| Cancelled   |        | Cancelled
+| Processing | Processing | Processing
+| Processing | Exception | Processing
+| Processing | On Hold | Processing
+| Processing | Cancelled | Processing
+| Processing | Completed | Partially Fulfilled
+| Exception | Exception | Exception
+| Exception | On Hold | Exception
+| Exception | Completed | Partially Fulfilled
+| Exception | Cancelled | Exception
+| On Hold | On Hold | Exception
+| On Hold | Completed | Partially Fulfilled
+| On Hold | Cancelled | Exception
+| Completed | Completed | Fulfilled
+| Completed | Cancelled | Partially Fulfilled
+| Cancelled | Cancelled | Cancelled
+
+## FAQ
+Please review our documentation thoroughly. Common issues that come up are listed here:
+
+<AccordionGroup>
+  <Accordion title="Why can't I see my products in the ShipBob UI?">
+    We are undergoing a schema migration to better support new features. Thus, the API has concepts - like "product" - which are not yet reflected in the UI. What you see on the UI is an inventory item, which is automatically created when you send us a channel product.
+  </Accordion>
+  <Accordion title="Why can't I submit an order for a product that already exists in ShipBob's UI?">
+    At ShipBob you must create “channel product” records in our system in order to create orders. This is so we always have a unique and immutable tie to the upstream system, which reduces the risk of line item errors and order duplication. You cannot create orders with inventory_ids or with products created from other sources. Please review our documentation:
+
+    There are 2 ways to create products for your convenience:
+
+    1. Create the products via the Product POST. If you pass through a SKU that already exists in the ShipBob UI as the product’s “reference_id”, we will automatically merge that product to the existing inventory. Otherwise, the merchant will have to manually “merge” the items using our UI
+
+    2. Create the products using both the <code>reference_id</code> and <code>name</code> fields in the line item field for the Order POST. We will auto-create any unrecognized products given both reference_id and name are provided when you send us orders. This replaces the products sync step described above. Similarly, we will auto-merge the items in the manner described above if appropriate.
+  </Accordion>
+</AccordionGroup>
+
 
