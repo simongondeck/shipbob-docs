@@ -7,6 +7,24 @@ description: 'You'll need to authenticate your requests to access any of the end
 
 With basic authentication, you use your username and password to authenticate your HTTP requests. Unless you have a very good reason, you probably shouldn't use basic auth. Here's how to authenticate using cURL:
 
+## Personal Access Token (PAT) Flow
+When you request your first PAT, ShipBob automatically generates an application (called "SMA" or single-merchant application) and channel to house all your future PATs. You can request as many as you like, and revoke them at any time.
+
+Your PAT should automatically have read and write access to the entire ShipBob account.
+
+To use your PAT, just provide the token as an Authorization header formatted like this:
+
+First you should use your PAT to hit the GET Channel endpoint, so you can use your channel ID in the headers of subsequent API calls. Your response will look like this:
+
+<code>
+"id": 56232,
+"name": "Personal Access Token Thursday, March 19, 2020",
+"application_name": "SMA",
+"scopes": [
+    "channels_read orders_read orders_write products_read products_write receiving_read receiving_write returns_read returns_write inventory_read"
+]
+</code>
+
 
 ## OAuth Flow
 To finish the authentication process, your app will have to do the following:
