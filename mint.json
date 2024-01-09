@@ -21,7 +21,8 @@
               "authentication",
               "sandbox",
               "errors",
-              "webhooks"
+              "webhooks",
+              "tools"
             ]
         },
         {
