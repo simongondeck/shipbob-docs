@@ -6,3 +6,13 @@ description: 'You'll need to authenticate your requests to access any of the end
 ## Basic Authentication
 
 With basic authentication, you use your username and password to authenticate your HTTP requests. Unless you have a very good reason, you probably shouldn't use basic auth. Here's how to authenticate using cURL:
+
+
+## OAuth Flow
+To finish the authentication process, your app will have to do the following:
+
+1. Request a client ID and client secret.
+2. Request authorization from a ShipBob user.
+3. Retrieve an authorization code from a provided callback.
+4. Exchange the authorization code for an access token.
+5. Begin making API calls.
