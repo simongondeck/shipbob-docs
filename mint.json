@@ -11,6 +11,20 @@
       "dark": "#175cff"
     },
     "tabs": [],
+    "tabs": [
+      {
+        "name": "Documentation",
+        "url": "introduction"
+      },
+      {
+        "name": "API References",
+        "url": "api-reference"
+      }
+      {
+        "name": "Changelog",
+        "url": "changelog"
+      }
+    ]
     "anchors": [],
     "navigation": [
         {
