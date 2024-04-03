@@ -17,17 +17,17 @@
       },
       {
         "name": "API References",
-        "url": "api-reference"
+        "url": "api-references"
       }
       {
         "name": "Changelog",
         "url": "changelog"
       }
-    ]
+    ],
     "anchors": [],
     "navigation": [
         {
-            "group": "Guides",
+            "group": "Overview",
             "pages": [
               "introdution",
               "quickstart",
@@ -36,6 +36,12 @@
               "errors",
               "webhooks",
               "tools"
+            ]
+        },
+        {
+            "group": "Guides",
+            "pages": [
+              "orders"
             ]
         },
         {
