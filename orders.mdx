@@ -3,4 +3,18 @@ title: 'Orders'
 description: ''
 ---
 
-Updates to our API
+Quick guidelines on creating D2C orders:
+ShipBob’s Order POST endpoint has several required fields that you need to be aware of:
+
+Shipping method: This is typically a value such as “Standard”, “Expedited”, “2-Day”, etc. Once a ship method comes through via the integration, the merchant will have the ability to map the method to a specific Ship Option that will determine the shipment’s SLA and carrier selection. More detail on Ship Options can be found in our help center here.
+Recipient name - The name of the individual the shipment will be delivered to.
+Recipient address – specifically the Address1, City, and Country (ISO Alpha-2 code is highly recommended).
+If available, please also pass the City and Zip Code.
+Reference id – This is a unique order number from the upstream platform being integrated with ShipBob. This number must be unique within ShipBob account.
+You can also pass an optional order_number field. This does not need to be unique, and is a more user-friendly order number that a customer service agent might be more familiar with.
+Products – There are two methods for providing product data with your order payload to ShipBob:
+ReferenceId Model (highly recommended) – This model allows you to pass a product’s reference_id (typically the SKU value), as well as the product name. When an order is created, ShipBob will check if the product already exists based on a matching reference_id, and will automatically create a new product if one does not already exist.
+This model is recommended as you do not need to store any external ShipBob product id values to create an order successfully. It also has the ability to auto-create products if they do not exist based on the duplicate match of a reference_id value.
+ProductId Model – This model requires that you pass ShipBob’s ProductId as part of the order payload to create the order. This will mean that you first must create a product using ShipBob’s Product API and have a method to either store or reference the ShipBob-generated ProductId to use as part of your order creation process.
+This model works best if you always create products in ShipBob prior to sending any orders, and have a way to store the ProductId somewhere upstream.
+When viewing the API documentation, you can toggle between each model by expanding the Product node:
