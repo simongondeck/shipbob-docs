@@ -147,5 +147,5 @@
           "thumbsRating": true
       },
     "theme": "venus",
-    "layout": "solidSidenav"
+    "layout": "sidenav"
   }
