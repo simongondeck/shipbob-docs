@@ -146,5 +146,6 @@
       {
           "thumbsRating": true
       },
-    "theme": "venus"
+    "theme": "venus",
+    "layout": "solidSidenav"
   }
