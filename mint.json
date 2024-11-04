@@ -136,6 +136,12 @@
             ]
         }
     ],
+    "footerSocials":
+      {
+          "linkedin": "https://www.linkedin.com/company/shipbob-inc-/",
+          "facebook": "https://www.facebook.com/LoveShipBob/",
+          "twitter": "https://twitter.com/shipbob"
+      },
     "feedback":
       {
           "thumbsRating": true
