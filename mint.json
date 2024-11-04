@@ -145,5 +145,6 @@
     "feedback":
       {
           "thumbsRating": true
-      }
+      },
+    "theme": "venus"
   }
