@@ -32,3 +32,22 @@ In addition to the required fields highlighted above, you also have the ability 
 More details on available rules can be found here.
 
 To trigger a rule created within ShipBob, the order tag **name** must match the rule. As an example, if you desire to pass a tag that triggers a rule to automatically add a marketing insert to specific orders, your tag structure may look like:
+
+
+
+```
+"tags": [
+  {
+    "name": "AddMarketingInsert",
+    "value": "NotUsedForRuleTrigger"
+  },
+  {
+    "name": "Subscription First Order",
+    "value": "0"
+  }
+],
+```
+
+Where the tag “name” value of “AddMarketingInsert” is what will be used to trigger a rule created in ShipBob.
+
+Lastly, you will need to also specific a **`shipbob_channel_id`** within the request header to successfully create an order. To find which channel you have write access to, you can call the [GET Channel](https://developer.shipbob.com/api-docs#tag/Channels/paths/~11.0~1channel/get) endpoint to view a list of permissions you have access to under each channel. You will only have write access for one channel (your own integration channel), but you typically will have the ability to read data across other channels.
