@@ -46,29 +46,3 @@ ShipBob doesn’t guarantee delivery of retried events in the order in which the
 * shipment\_cancelled
 
 Your endpoint shouldn’t expect delivery of these events in this order in case of retries and would need to handle delivery accordingly.
-
-## Webhook Topics
-
-
-
-| Topic name     | Description                                                                                                                                                                                                                                                                                                          | Scopes Required |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| order\_shipped | Sends the full order payload when the label is purchased, printed, and placed on box for carrier pickup. While the tracking # will be available, there may be a delay while carriers scan in the package. If the order is split into multiple shipments, this will fire for each shipment that is part of the order. | orders\_read    |
-
-
-
-\| **Topic name** | **Scopes Required**                                       |
-
-\| -------- | ----------------------------------------------- |
-
-\| order\_shipped               | orders\_read                                     |
-
-\| shipment\_delivered      | orders\_read or fulfillments\_read   |
-
-\| shipment\_exception     | orders\_read or fulfillments\_read  |
-
-
-
-## Payload by topic
-
-Unless specified in the table above, the webhook notification sends the full data model of the underlying resource, that is available in the GET endpoint.&#x20;
