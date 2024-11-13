@@ -3,4 +3,21 @@ title: 'Webhooks'
 description: 'In this guide, we will look at how to register and consume webhooks to integrate your app with ShipBob. With webhooks, your app can know when something happens in ShipBob, such as an order being shipped or a shipment being delivered.'
 ---
 
-There are two methods of using this API: a "Personal Access Token (PAT)" for single-merchant or custom integrations, and an OAuth 2.0 process for general-purpose integrations or those that will be listed on ShipBob's App Marketplace. Please see the Auth tab for more details.
+ShipBob’s webhooks can simplify your development by pushing a payload to your app whenever certain events occur. Currently, the only way to subscribe to webhooks is through our Webhooks API (more details on the API documentation page).
+
+This API has its own scopes - webhooks_read and webhooks_write, which you must request if you are using an OAuth application. Personal Access Tokens (PATs) will automatically be granted these scopes.
+
+A subscription is a request for data to be sent to a URL specified by the developer of the application. Subscriptions belong to users. An application can have multiple subscriptions for 1 user, and can have multiple subscriptions to the same topic if they are different subscription URL.
+The subscription URL is the destination to which the payload will be POSTed upon the event happening for a given topic. Subscription URLs belong to the subscription, i.e. one application can have multiple subscriptions that have different subscription URLs.
+An event is a trigger for the data for a given topic to be sent. For example - an action in the physical world like an order being shipped.
+A topic is a specific payload of data requested to be sent to the subscription URL. Applications can subscribe to multiple topics, or the same topic more than once.
+The payload is the data that is delivered.
+The response is what the ShipBob webhooks API expects to receive after making a POST request to a subscription URL. 2XX responses are expected.
+Some webhooks topics are sensitive to channel - upon creating a subscription, you can specify which channel you’d like to receive data for. For example, if you have 2 sales channels creating orders but only want data sent for your Shopify channel #122233, you would pass through "shipbob_channel_id": "122233" in the header when POSTing your webhooks subscription.
+
+Best Practices & Troubleshooting
+Subscription URLs must be SSL-encrypted. We recommend RequestBin if testing in an environment without SSL.
+You should not solely rely on webhooks. We recommend using GET endpoints to periodically reconcile data.
+We do not allow editing of subscription URLs. Instead, you should delete the subscription, and create a new one.
+Retry Policy
+At this time, we do not try to re-send data if a failure occurs. Please ensure a timely 200-range response to avoid failures.
