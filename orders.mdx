@@ -52,7 +52,7 @@ Where the tag “name” value of “AddMarketingInsert” is what will be used 
 
 Lastly, you will need to also specific a **`shipbob_channel_id`** within the request header to successfully create an order. To find which channel you have write access to, you can call the [GET Channel](https://developer.shipbob.com/api-docs#tag/Channels/paths/~11.0~1channel/get) endpoint to view a list of permissions you have access to under each channel. You will only have write access for one channel (your own integration channel), but you typically will have the ability to read data across other channels.
 
-## Quick guidelines on creating B2B orders via API
+## Creating B2B orders
 
 ShipBob has the ability to ingest generic B2B orders via the public API. Please note that these are B2B orders which do not have retailer compliance standards, ShipBob standard packing slips, boxes, GS1 labels will be used for these orders. If you are working with retailers that have compliance guideles that ShipBob must adhere to, please reach out to your Merchant Success Manager for additional assistance.
 
