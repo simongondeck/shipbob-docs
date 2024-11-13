@@ -49,6 +49,14 @@ Your endpoint shouldn’t expect delivery of these events in this order in case 
 
 ## Webhook Topics
 
+
+
+| Topic name     | Description                                                                                                                                                                                                                                                                                                          | Scopes Required |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| order\_shipped | Sends the full order payload when the label is purchased, printed, and placed on box for carrier pickup. While the tracking # will be available, there may be a delay while carriers scan in the package. If the order is split into multiple shipments, this will fire for each shipment that is part of the order. | orders\_read    |
+
+
+
 \| **Topic name** | **Scopes Required**                                       |
 
 \| -------- | ----------------------------------------------- |
