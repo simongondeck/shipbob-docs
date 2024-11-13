@@ -51,3 +51,29 @@ To trigger a rule created within ShipBob, the order tag **name** must match th
 Where the tag “name” value of “AddMarketingInsert” is what will be used to trigger a rule created in ShipBob.
 
 Lastly, you will need to also specific a **`shipbob_channel_id`** within the request header to successfully create an order. To find which channel you have write access to, you can call the [GET Channel](https://developer.shipbob.com/api-docs#tag/Channels/paths/~11.0~1channel/get) endpoint to view a list of permissions you have access to under each channel. You will only have write access for one channel (your own integration channel), but you typically will have the ability to read data across other channels.
+
+## Quick guidelines on creating B2B orders via API
+
+ShipBob has the ability to ingest generic B2B orders via the public API. Please note that these are B2B orders which do not have retailer compliance standards, ShipBob standard packing slips, boxes, GS1 labels will be used for these orders. If you are working with retailers that have compliance guideles that ShipBob must adhere to, please reach out to your Merchant Success Manager for additional assistance.
+
+Generic B2B orders passing through ShipBob’s API must be sent with specific required fields to ensure they fall under our B2B flow as opposed to the default D2C flow.
+
+Attached, you will find an example API request for a general b2b order. While reviewing this example, there are several fields to note within this payload that differ from a standard D2C order:
+
+* Ensure that the `type` is set to a value of 2 or “B2B” (this denotes a B2B order type).
+
+* `carrier_type` will be either “Parcel” or “Freight” – recommended that you have the ability to select which of these options should be used.
+
+* `shipping_method` should be “B2B”.
+
+* `payment_terms` can either be “Prepaid” or “MerchantResponsible”.
+
+  * This depends if you will be uploading your own labels on the ShipBob dashboard, or if ShipBob will provide the labels. If ShipBob will handle labels, then pass the value “Prepaid”.
+
+* `retailer_program_type` should be set to “SB-B2B”.
+
+* Pass a `purchase_order_number`.
+
+* `company_name` within the recipient address data should be the retailer’s name.
+
+* `quantity_unit_of_measure_code` should be “EA” for eaches
