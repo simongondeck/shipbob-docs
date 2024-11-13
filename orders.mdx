@@ -7,7 +7,7 @@ description: ''
 
 ShipBob’s Order POST endpoint has several required fields that you need to be aware of:
 
-* Shipping method: This is typically a value such as “Standard”, “Expedited”, “2-Day”, etc. Once a ship method comes through via the integration, the merchant will have the ability to map the method to a specific Ship Option that will determine the shipment’s SLA and carrier selection. More detail on Ship Options can be found in our help center here.
+* Shipping method: This is typically a value such as “Standard”, “Expedited”, “2-Day”, etc. Once a ship method comes through via the integration, the merchant will have the ability to map the method to a specific Ship Option that will determine the shipment’s SLA and carrier selection. More detail on Ship Options can be found in our help center [here](https://support.shipbob.com/s/article/Available-Ship-Options-and-Average-Carrier-Transit-Times-by-Country-of-Origin).
 
 * Recipient name - The name of the individual the shipment will be delivered to.
 
@@ -29,7 +29,7 @@ When viewing the API documentation, you can toggle between each model by expandi
 
 In addition to the required fields highlighted above, you also have the ability to pass order tags to ShipBob. Tags are an array that consists of a name, value pair which can be used to store additional data that might be needed with your platform upstream, and can also trigger automation rules that have been created in ShipBob.
 
-More details on available rules can be found here.
+More details on available rules can be found [here](https://support.shipbob.com/s/article/Automation-Rules).
 
 To trigger a rule created within ShipBob, the order tag **name** must match the rule. As an example, if you desire to pass a tag that triggers a rule to automatically add a marketing insert to specific orders, your tag structure may look like:
 
