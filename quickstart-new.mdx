@@ -1,0 +1,82 @@
+---
+title: "Quickstart"
+description: "This quickstart guide intends to walk you through a few common scenarios to let you understand how to use the ShipBob API."
+---
+
+## 1. What is ShipBob API?
+
+The ShipBob API helps you perform admin operations on the returns generated via ShipBob API in case there is an enterprise's integration need for their internal system programmatically.
+
+## 2. Get the API key
+
+ShipBob verifies a user's request by adding an as-api-key in the header.
+
+To get your API key, visit API key, click Create an API key and follow the given instructions to generate your API key.
+
+Button: Get API Key
+
+## 3. Get your channel ID
+
+```
+https://api.shipbob.com/1.0/channel
+```
+
+All endpoints are only accessible via `HTTPS`.
+
+## 4. Common scenarios
+
+A few common scenarios to get started with the ShipBob API.&#x20;
+
+### Create product
+
+Make sure to pass the `shipbob_channel_id` in the header.
+
+<CodeGroup>
+  ```json
+  {
+    "reference_id": "TShirtBlueM",
+    "sku": "TShirtBlueM",
+    "name": "Medium Blue T-Shirt"
+  }
+  ```
+</CodeGroup>
+
+### Create order
+
+Similar to creating products, you need to pass the `shipbob_channel_id` in the header.&#x20;
+
+<CodeGroup>
+  ```json helloWorld.js
+  {
+    "shipping_method": "Standard",
+    "recipient": {
+      "name": "John Doe",
+      "address": {
+        "address1": "100 Nowhere Blvd",
+        "address2": "Suite 100",
+        "city": "Gotham City",
+        "state": "NJ",
+        "country": "US",
+        "zip_code": "07093"
+      },
+      "email": "john@example.com",
+      "phone_number": "555-555-5555"
+    },
+    "products": [
+      {
+        "reference_id": "COF-LGT-REG",
+        "sku": "COF-LGT-REG",
+        "name": "Light Roast Coffee"
+      },
+      {
+        "reference_id": "COF-DARK-REG",
+        "sku": "COF-DARK-REG",
+        "name": "Dark Roast Coffee"
+      }
+    ],
+    "reference_id": "101",
+    "order_number": "840343901234",
+    "type": "DTC",
+  }
+  ```
+</CodeGroup>
