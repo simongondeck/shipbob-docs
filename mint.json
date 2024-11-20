@@ -39,6 +39,8 @@
             "pages": [
               "orders",
               "products",
+              "tracking",
+              "inventory",
               "returns"
             ]
         },
