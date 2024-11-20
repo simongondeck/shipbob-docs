@@ -3,19 +3,17 @@ title: "Quickstart"
 description: "This quickstart guide intends to walk you through a few common scenarios to let you understand how to use the ShipBob API."
 ---
 
-## 1. What is ShipBob API?
 
-The ShipBob API helps you perform admin operations on the returns generated via ShipBob API in case there is an enterprise's integration need for their internal system programmatically.
 
-## 2. Get the API key
+## 1. Get API key
 
 ShipBob verifies a user's request by adding an as-api-key in the header.
 
-To get your API key, visit API key, click Create an API key and follow the given instructions to generate your API key.
+On the ShipBob dashboard, go to Integrations > API Tokens. Click Generate New Token. Copy this token as we will use in next step. If you do not have a ShipBob account yet, you can create a sandbox account by following [this link](https://webstage.shipbob.dev/app/merchant/#/SignUp).&#x20;
 
-Button: Get API Key
+## 2. Make your first API request
 
-## 3. Get your channel ID
+Open up Postman or your favorite API client. Make a request to y
 
 ```
 https://api.shipbob.com/1.0/channel
@@ -25,19 +23,11 @@ All endpoints are only accessible via `HTTPS`.
 
 ## 4. Common scenarios
 
-A few common scenarios to get started with the ShipBob API.&#x20;
+A few common scenarios to get started with the ShipBob API.
 
 ### Create product
 
 Make sure to pass the `shipbob_channel_id` in the header.
-
-```
-{
-  "reference_id": "TShirtBlueM",
-  "sku": "TShirtBlueM",
-  "name": "Medium Blue T-Shirt"
-}
-```
 
 <CodeGroup>
   ```json
@@ -73,13 +63,13 @@ Similar to creating products, you need to pass the `shipbob_channel_id` in the h
     "products": [
       {
         "reference_id": "COF-LGT-REG",
-        "sku": "COF-LGT-REG",
-        "name": "Light Roast Coffee"
+        "name": "Light Roast Coffee",
+        "quantity": 1,
       },
       {
         "reference_id": "COF-DARK-REG",
-        "sku": "COF-DARK-REG",
-        "name": "Dark Roast Coffee"
+        "name": "Dark Roast Coffee",
+        "quantity": 1,
       }
     ],
     "reference_id": "101",
@@ -90,6 +80,45 @@ Similar to creating products, you need to pass the `shipbob_channel_id` in the h
 </CodeGroup>
 
 
+
+### Create Warehouse Receiving Order
+
+When you create warehouse receiving orders with the ShipBob API, you do not need to pass the `shipbob_channel_id`.
+
+<CodeGroup>
+  ```javascript helloWorld.js
+  {
+    "fulfillment_center": {
+      "id": 8
+    },
+    "package_type": "Package",
+    "box_packaging_type": "EverythingInOneBox",
+    "boxes": [
+      {
+        "tracking_number": "860C8CDC8F0B4FC7AB69AC86C20539EC",
+        "box_items": [
+          {
+            "quantity": 1,
+            "inventory_id": 0
+          }
+        ]
+      }
+    ],
+    "expected_arrival_date": "2025-11-24T14:15:22Z",
+    "purchase_order_number": "PO123"
+  }
+  ```
+</CodeGroup>
+
+
+
+##
+
+<Check>
+  Download our [OpenAPI spec](blob:https://developer.shipbob.com/e2e5b9a7-6b80-4461-aae1-89561a76e2e8).
+</Check>
+
+## &#x20;
 
 ## Update your docs
 
