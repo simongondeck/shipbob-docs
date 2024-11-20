@@ -13,17 +13,17 @@ On the ShipBob dashboard, go to Integrations > API Tokens. Click Generate New To
 
 ## 2. Make your first API request
 
-Open up Postman or your favorite API client. Make a request to y
+Use your PAT token to make a request to the GET Channels endpoint. You will need the channel ID to create products, orders and returns with the ShipBob API.
 
 ```
-https://api.shipbob.com/1.0/channel
+GET https://api.shipbob.com/1.0/channel
+Headers
+- Authorization: Bearer {insert token}
 ```
 
-All endpoints are only accessible via `HTTPS`.
+## 3. Common scenarios
 
-## 4. Common scenarios
-
-A few common scenarios to get started with the ShipBob API.
+A few common scenarios to get started with the ShipBob API. All endpoints are only accessible via `HTTPS`.
 
 ### Create product
 
