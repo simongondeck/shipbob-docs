@@ -23,10 +23,10 @@
     "anchors": [],
     "navigation": [
         {
-            "group": "Overview",
+            "group": "QUICKSTART",
             "pages": [
-              "introdution",
-              "quickstart",
+              "api-quickstart",
+              "introduction",
               "authentication",
               "sandbox",
               "errors",
@@ -35,7 +35,7 @@
             ]
         },
         {
-            "group": "Guides",
+            "group": "GUIDES",
             "pages": [
               "orders",
               "products",
