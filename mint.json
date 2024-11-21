@@ -23,11 +23,15 @@
     "anchors": [],
     "navigation": [
         {
-            "group": "QUICKSTART",
+            "group": "Quickstart",
             "pages": [
               "api-quickstart",
               "introduction",
               "authentication",
+              {
+                "group": "Nested Reference Pages",
+                "pages": ["nested-reference-page"]
+              },
               "sandbox",
               "errors",
               "webhooks",
@@ -35,7 +39,7 @@
             ]
         },
         {
-            "group": "GUIDES",
+            "group": "Guides",
             "pages": [
               "orders",
               "products",
