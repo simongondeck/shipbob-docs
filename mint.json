@@ -27,23 +27,13 @@
             "pages": [
               "api-quickstart",
               "introduction",
-              "authentication",
+              "auth",
               "sandbox",
               "errors",
               "webhooks",
               "tools"
             ]
         },
-        {
-            "group": "Getting Started",
-            "pages": [
-                "OAuth",
-                {
-                    "group": "Nested Reference Pages",
-                    "pages": ["auth"]
-                }
-            ]
-        }
         {
             "group": "Guides",
             "pages": [
