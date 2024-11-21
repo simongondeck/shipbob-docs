@@ -1,3 +1,13 @@
 ---
-title: "New file"
+title: "Rate Limit"
 ---
+
+Please give us time to process your requests. If you're sending too many requests too quickly, we'll respond with a 429 error code (TooManyRequests).
+
+The API response headers also give you the following rate limit detailed information:
+
+| Header                | Example    | Description                                              |
+| --------------------- | ---------- | -------------------------------------------------------- |
+| X-RateLimit-Reset     | 1406096275 | The Unix timestamp when the rate limit will be reset.    |
+| X-RateLimit-Limit     | 20         | The rate limit ceiling for the current endpoint per sec. |
+| X-RateLimit-Remaining | 19         | The number of requests left for the 1-second window.     |
