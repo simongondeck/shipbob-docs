@@ -1,6 +1,8 @@
 ---
-title: "Rate Limit"
+title: "Rate limit"
 ---
+
+API calls will be rate-limited to 150 requests per-minute using a sliding window, and will be totalled per user, per application across calls to any of the ShipBob APIs.
 
 Please give us time to process your requests. If you're sending too many requests too quickly, we'll respond with a 429 error code (TooManyRequests).
 
