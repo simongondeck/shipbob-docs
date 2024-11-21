@@ -5,18 +5,22 @@ description: ''
 
 ShipBob's Developer API allows 2 forms of authentication, depending on the use case: Personal Access Token (PAT) or OAuth 2.0.
 
-- If you're building a single-user custom integration, you can use the Personal Access Token (PAT) method. This generates a ready-to-use bearer-type token with full access to the merchant's account.
+* If you're building a single-user custom integration, you can use the Personal Access Token (PAT) method. This generates a ready-to-use bearer-type token with full access to the merchant's account.
 
-    - You can generate credentials from the ShipBob dashboard.
-        - For Production Environment, [click here](https://web.shipbob.com/app/merchant/#/Integrations/token-management).
-        - For Sandbox Environment, [click here](https://webstage.shipbob.dev/app/merchant/#/Integrations/token-management).
+  * You can generate credentials from the ShipBob dashboard.
 
-- If you are building an integration or app that will be multi-user or listed on our App Store, you must use the OAuth flow.
-    - You can request credentials by filling out the form [here](https://forms.office.com/r/AYx81v67MD).
+    * For Production Environment, [click here](https://web.shipbob.com/app/merchant/#/Integrations/token-management).
+
+    * For Sandbox Environment, [click here](https://webstage.shipbob.dev/app/merchant/#/Integrations/token-management).
+
+* If you are building an integration or app that will be multi-user or listed on our App Store, you must use the OAuth flow.
+
+  * You can request credentials by filling out the form [here](https://forms.office.com/r/AYx81v67MD).
 
 <Note>All API authentication operates against the root user of the account. When requesting a PAT token or installing an OAuth app, you should do so against the root user.</Note>
 
 ## Personal Access Token (PAT) Flow
+
 When you request your first PAT, ShipBob automatically generates an application (called "SMA" or single-merchant application) and [channel](https://developer.shipbob.com/api-docs#tag/Channels) to house all your future PATs. You can request as many as you like, and revoke them at any time.
 
 <Note>These tokens do not expire, so be extremely cautious when sharing them.</Note>
@@ -42,17 +46,22 @@ First you should use your PAT to hit the [GET Channel](https://developer.shipbob
 }
 ```
 
-
 ## OAuth Flow
+
 To finish the authentication process, your app will have to do the following:
 
 1. Request a client ID and client secret.
+
 2. Request authorization from a ShipBob user.
+
 3. Retrieve an authorization code from a provided callback.
+
 4. Exchange the authorization code for an access token.
+
 5. Begin making API calls.
 
 ### Step 0: Get Familiar with OAuth 2.0
+
 At ShipBob, we use OAuth 2.0 for its robust security and relatively universal implementations.
 
 If you’re not familiar, you can read more about working with OAuth’s hybrid flow [here](https://auth0.com/docs/api-auth/grant/hybrid).
@@ -67,26 +76,26 @@ In addition to requesting scopes, you will need to provide us with a list of cal
 
 You may request access for the following scopes:
 
-| Scope              | Description                           |
-| ------------------ | ---------------------------------- |
-| orders_read        |                      |
-| orders_write       |                           |
-| products_read      |  |
-| products_write     |  |
-| fulfillments_read  |  |
-| inventory_read     |  |
-| channels_read      |  |
-| receiving_read     |  |
-| receiving_write    |  |
-| returns_read       |  |
-| returns_write      |  |
-| webhooks_read      |  |
-| webhooks_write     |  |
-| locations_read     |  |
-| offline_access     |  |
-
+| Scope              | Description |
+| ------------------ | ----------- |
+| orders\_read       |             |
+| orders\_write      |             |
+| products\_read     |             |
+| products\_write    |             |
+| fulfillments\_read |             |
+| inventory\_read    |             |
+| channels\_read     |             |
+| receiving\_read    |             |
+| receiving\_write   |             |
+| returns\_read      |             |
+| returns\_write     |             |
+| webhooks\_read     |             |
+| webhooks\_write    |             |
+| locations\_read    |             |
+| offline\_access    |             |
 
 ### Step 2: Request Permission to See User's Data
+
 <Note>if you do not yet have a ShipBob user in mind - you can sign up for a free demo account here: https://web.shipbob.com/app/Merchant/#/SignUp. The demo period does not expire and you can effectively use this as a sandbox to test API calls for your application to your user account.</Note>
 
 Once you have your client ID and secret, you can use them to get a user’s permission to access their account data. You start by making a request to the following endpoint:
@@ -97,7 +106,7 @@ GET https://auth.shipbob.com/connect/authorize
 
 The following query parameters are allowed for this endpoint:
 
-<Note>These parameters must be URL encoded, particularly <code>redirect_uri</code>.</Note>
+<Note>These parameters must be URL encoded, particularly <code>redirect\_uri</code>.</Note>
 
 A very basic example call to our integrate endpoint will look like this:
 
@@ -109,6 +118,7 @@ GET https://auth.shipbob.com/connect/authorize?
 ```
 
 ### Step 3: Implement Your Callback URI
+
 Now that you’ve made a call to the "integrate" endpoint, the granting of permission is entirely within the user’s hands. Whether they grant or not, your application must implement a GET endpoint with the following URI fragment parameters:
 
 By default, we will call the following:
