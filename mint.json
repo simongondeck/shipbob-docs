@@ -12,6 +12,10 @@
     },
     "tabs": [
       {
+        "name": "Documentation",
+        "url": "api-quickstart"
+      },
+      {
         "name": "API Reference",
         "url": "api-reference"
       },
