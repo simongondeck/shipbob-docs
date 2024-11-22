@@ -29,7 +29,9 @@
                 {
                     "group": "Authentication",
                     "pages": ["auth", "sandbox"]
-                }
+                },
+                "rate-limit",
+                "request-errors"
             ]
         },
         {
