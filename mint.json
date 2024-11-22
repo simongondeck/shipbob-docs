@@ -5,6 +5,9 @@
       "dark": "/logo/dark.png"
     },
     "favicon": "/favicon.png",
+    "background": {
+      "style": "windows"
+    },
     "colors": {
       "primary": "#175cff",
       "light": "#457CFE",
