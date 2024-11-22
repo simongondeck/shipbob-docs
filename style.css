@@ -6,3 +6,7 @@
 #sidebar > img {
 	height: 2rem;
 }
+
+#sidebar-content > a > img {
+	height: 2rem;
+}
