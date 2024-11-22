@@ -23,15 +23,13 @@
     "anchors": [],
     "navigation": [
         {
-            "group": "Quickstart",
+            "group": "Getting Started",
             "pages": [
-              "api-quickstart",
-              "introduction",
-              "auth",
-              "sandbox",
-              "errors",
-              "webhooks",
-              "tools"
+                "quickstart",
+                {
+                    "group": "Nested Reference Pages",
+                    "pages": ["api-quickstart"]
+                }
             ]
         },
         {
