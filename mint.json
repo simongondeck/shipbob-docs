@@ -13,6 +13,7 @@
       "light": "#457CFE",
       "dark": "#175cff"
     },
+    "topbar": "default",
     "tabs": [
       {
         "name": "Documentation",
