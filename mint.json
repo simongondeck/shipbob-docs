@@ -52,6 +52,12 @@
             ]
         },
         {
+            "group": "Changelog",
+            "pages": [
+              "changelog/changelog"
+            ]
+        },
+        {
             "group": "API Reference",
             "pages": [
                 {
