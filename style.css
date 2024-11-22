@@ -3,6 +3,6 @@
   padding: 1rem;
 }
 
-footer {
-  margin-top: 2rem;
+#sidebar > img {
+	height: 2rem;
 }
