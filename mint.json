@@ -25,10 +25,10 @@
         {
             "group": "Getting Started",
             "pages": [
-                "quickstart",
+                "api-quickstart",
                 {
-                    "group": "Nested Reference Pages",
-                    "pages": ["api-quickstart"]
+                    "group": "Authentication",
+                    "pages": ["auth", "sandbox"]
                 }
             ]
         },
