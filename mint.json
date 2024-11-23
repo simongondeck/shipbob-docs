@@ -168,5 +168,6 @@
       {
           "thumbsRating": true
       },
-    "layout": "topnav"
+    "layout": "sidenav",
+    "theme": "quill"
   }
