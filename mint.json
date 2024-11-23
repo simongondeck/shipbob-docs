@@ -168,5 +168,5 @@
       {
           "thumbsRating": true
       },
-    "layout": "sidenav"
+    "layout": "solidSidenav"
   }
