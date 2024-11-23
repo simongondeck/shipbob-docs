@@ -6,7 +6,7 @@
     },
     "favicon": "/favicon.png",
     "background": {
-      "style": "windows"
+      "style": "grid"
     },
     "colors": {
       "primary": "#175cff",
@@ -168,5 +168,5 @@
       {
           "thumbsRating": true
       },
-    "layout": "solidSidenav"
+    "layout": "topnav"
   }
