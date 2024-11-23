@@ -8,8 +8,13 @@ Please give us time to process your requests. If you're sending too many request
 
 The API response headers also give you the following rate limit detailed information:
 
-| Header                | Example    | Description                                              |
-| --------------------- | ---------- | -------------------------------------------------------- |
-| X-RateLimit-Reset     | 1406096275 | The Unix timestamp when the rate limit will be reset.    |
-| X-RateLimit-Limit     | 20         | The rate limit ceiling for the current endpoint per sec. |
-| X-RateLimit-Remaining | 19         | The number of requests left for the 1-second window.     |
+| Header        | Example | Description                                      |
+| ------------- | ------- | ------------------------------------------------ |
+| x-retry-after | 25      | Rate limit is exceeded. Try again in 25 seconds. |
+
+```
+{
+    "statusCode": 429,
+    "message": "Rate limit is exceeded. Try again in 25 seconds."
+}
+```
