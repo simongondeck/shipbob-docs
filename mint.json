@@ -6,7 +6,7 @@
     },
     "favicon": "/favicon.png",
     "background": {
-      "style": "grid"
+      "style": "windows"
     },
     "colors": {
       "primary": "#175cff",
