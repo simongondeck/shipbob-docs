@@ -8,6 +8,8 @@
     "background": {
       "style": "windows"
     },
+    "layout": "sidenav",
+    "theme": "venus",
     "colors": {
       "primary": "#175cff",
       "light": "#457CFE",
@@ -158,16 +160,12 @@
             ]
         }
     ],
-    "footerSocials":
-      {
+    "footerSocials": {
           "linkedin": "https://www.linkedin.com/company/shipbob-inc-/",
           "facebook": "https://www.facebook.com/LoveShipBob/",
           "twitter": "https://twitter.com/shipbob"
-      },
-    "feedback":
-      {
+    },
+    "feedback": {
           "thumbsRating": true
-      },
-    "layout": "sidenav",
-    "theme": "quill"
+    },
   }
