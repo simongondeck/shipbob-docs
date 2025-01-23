@@ -8,8 +8,6 @@
     "background": {
       "style": "windows"
     },
-    "layout": "sidenav",
-    "theme": "venus",
     "colors": {
       "primary": "#175cff",
       "light": "#457CFE",
@@ -30,10 +28,6 @@
         "name": "API Reference",
         "url": "api-reference"
       },
-      {
-        "name": "ShipBob Logistics",
-        "url": "shipbob-logistics"
-      }
       {
         "name": "Changelog",
         "url": "changelog"
@@ -164,12 +158,16 @@
             ]
         }
     ],
-    "footerSocials": {
+    "footerSocials":
+      {
           "linkedin": "https://www.linkedin.com/company/shipbob-inc-/",
           "facebook": "https://www.facebook.com/LoveShipBob/",
           "twitter": "https://twitter.com/shipbob"
-    },
-    "feedback": {
+      },
+    "feedback":
+      {
           "thumbsRating": true
-    },
+      },
+    "layout": "sidenav",
+    "theme": "quill"
   }
