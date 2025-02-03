@@ -39,12 +39,12 @@
             "group": "Getting Started",
             "pages": [
                 "api-quickstart",
-                {
-                    "group": "Authentication",
-                    "pages": ["auth", "sandbox"]
-                },
-                "rate-limit",
-                "request-errors"
+                "guides",
+                "authentication",
+                "webhooks",
+                "sandbox-simulations",
+                "tools",
+                "release-notes"
             ]
         },
         {
