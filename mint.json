@@ -19,16 +19,7 @@
     "topbar": {
       "style": "default"
     },
-    "tabs": [
-      {
-        "name": "API Reference",
-        "url": "api-reference"
-      },
-      {
-        "name": "Changelog",
-        "url": "changelog"
-      }
-    ],
+    "tabs": [],
     "anchors": [],
     "navigation": [
         {
