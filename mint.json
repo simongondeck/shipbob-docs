@@ -2,7 +2,7 @@
     "name": "ShipBob",
     "logo": {
       "light": "/logo/light.png",
-      "dark": "/logo/dark.png"
+      "dark": "/logo/dark.png" 
     },
     "favicon": "/favicon.png",
     "background": {
@@ -169,5 +169,15 @@
           "thumbsRating": true
       },
     "layout": "sidenav",
-    "theme": "venus"
+    "theme": "venus",
+    "versions": [
+      {
+        "name": "v1",
+        "default": true
+      },
+      {
+        "name": "v2",
+        "default": true
+      }
+    ]
   }
