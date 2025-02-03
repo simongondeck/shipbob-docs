@@ -22,7 +22,7 @@
     "tabs": [
       {
         "name": "Documentation",
-        "url": "api-quickstart"
+        "url": "introduction"
       },
       {
         "name": "API Reference",
@@ -38,23 +38,13 @@
         {
             "group": "Getting Started",
             "pages": [
-                "api-quickstart",
+                "introduction",
                 "guides",
                 "authentication",
                 "webhooks",
                 "sandbox-simulations",
                 "tools",
                 "release-notes"
-            ]
-        },
-        {
-            "group": "Guides",
-            "pages": [
-              "orders",
-              "products",
-              "tracking",
-              "inventory",
-              "returns"
             ]
         },
         {
