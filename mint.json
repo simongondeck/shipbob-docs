@@ -39,7 +39,6 @@
             "pages": [
                 {
                     "group": "Channels",
-                    "version": "beta",
                     "pages": [
                       "api-reference/channels/get-user-authorized-channel-info"
                     ]
