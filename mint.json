@@ -176,8 +176,7 @@
         "default": true
       },
       {
-        "name": "v2",
-        "default": true
+        "name": "v2"
       }
     ]
   }
