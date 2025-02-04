@@ -453,3 +453,14 @@ graph TD
     I -->|"Fetch status per box"| P["Use GET WRO Boxes API"]
     P -->|"Includes received quantities per box"| P1["Track received inventory per box"]
 ```
+
+## Error Handling & Troubleshooting
+
+Common Errors & Solutions
+
+| Error Code              |   | Meaning                | Solution                                |
+| ----------------------- | - | ---------------------- | --------------------------------------- |
+| `400 Bad Request`       |   | Missing required field | Ensure all required fields are included |
+| `401 Unauthorized`      |   | Invalid API token      | Verify authentication headers           |
+| `404 Not Found`         |   | Invalid endpoint or ID | Check endpoint and request parameters   |
+| `429 Too Many Requests` |   | Rate limit exceeded    | Implement exponential backoff retries   |
