@@ -18,3 +18,14 @@ description: "Workflows for how to use ShipBob Logistics"
   * 2\. HasTracking
 
 * The tracking object has the details you will need to parse and store
+
+```mermaid
+graph TD
+    A[Your Integration] -->|Your Channel| B[Channel Product SKU123, productId 1111]
+    C[Merchant Integration 2 (Shopify Store)] -->|Shopify Channel| D[Channel Product SKU123, productId 1112]
+    E[Merchant Integration 3 (Magento Store)] -->|Magento Channel| F[Channel Product SKU123, productId 1113]
+    
+    B --> G[ShipBob Inventory Item SKU123, inventoryId 4444]
+    D --> G
+    F --> G
+```
