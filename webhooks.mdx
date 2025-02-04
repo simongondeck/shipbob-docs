@@ -60,8 +60,6 @@ Your endpoint shouldn’t expect delivery of these events in this order in case 
 | shipment\_onhold    | Sends the full shipment payload when a shipment moves to On-Hold status. Shipments are moved into On-Hold status by ShipBob when we are missing key information like Address or Packaging preferences. Shipments can also be moved to On-Hold in the Merchant Dashboard. On-Hold Shipments will not be fulfilled.    | orders\_read or fulfillments\_read |
 | shipment\_cancelled | Sends the full shipment payload when a shipment moves to cancelled status. This webhook subcription will NOT notify you of cancelled split, copied, manual, and excel imported orders. This functionality will be available on this webhook at a later point.                                                        | orders\_read or fulfillments\_read |
 
-
-
 ## Header
 
 The Topic and SubsciptionId are passed in the HTTP header of the webhook notification, with the names `shipbob-topic` and `shipbob-subscription-id`respectively.
@@ -231,3 +229,180 @@ Unless specified in the table above, the webhook notification sends the full dat
   }
   ```
 </Accordion>
+
+<AccordionGroup>
+  <Accordion title="Body sample for shipment_delivered topic:" defaultOpen={false}>
+    ```
+    {
+      "id": 101199464,
+      "order_id": 15948959,
+      "reference_id": "ORD-12347",
+      "recipient": {
+        "name": "John Doe co Wayne Enterprises",
+        "full_name": "John Doe",
+        "address": {
+          "address1": "123 Main St",
+          "address2": "Suite 100",
+          "company_name": "Wayne Enterprises",
+          "city": "Anytown",
+          "state": "NY",
+          "country": "US",
+          "zip_code": "12345"
+        },
+        "email": "john.doe@example.com",
+        "phone_number": "123-456-7890"
+      },
+      "created_date": "2024-04-08T10:04:44.4414562+00:00",
+      "last_update_at": "2024-04-08T12:11:18.0516082+00:00",
+      "last_tracking_update_at": null,
+      "status": "Completed",
+      "status_details": [
+        {
+          "name": "Delivered",
+          "description": "Shipment Delivered",
+          "id": 203,
+          "inventory_id": null,
+          "exception_fulfillment_center_id": null,
+          "extra_information": null
+        }
+      ],
+      "location": {
+        "id": 10,
+        "name": "Moreno Valley (CA)"
+      },
+      "invoice_amount": 6.41,
+      "invoice_currency_code": "USD",
+      "insurance_value": null,
+      "ship_option": "Ground",
+      "package_material_type": "Box",
+      "tracking": {
+        "carrier": "OSMWorldwide",
+        "tracking_number": "9261290306529427911297",
+        "carrier_service": "ParcelSelect",
+        "tracking_url": "https://tools.usps.com/go/TrackConfirmAction!input.action?tRef=qt&tLc=0&tLabels=9261290306529427911297",
+        "bol": null,
+        "shipping_date": null,
+        "pro_number": null,
+        "scac": null
+      },
+      "products": [
+    	{
+    	  "id": 4725516,
+    	  "reference_id": "TShirtBlueM",
+    	  "name": "Medium Blue T-Shirt",
+    	  "sku": "TShirtBlueM",
+    	  "inventory_items": [
+    		{
+    		  "id": 5264253,
+    		  "name": "Medium Blue T-Shirt",
+    		  "quantity": 4,
+    		  "quantity_committed": 4,
+    		  "lot": "22222",
+    		  "expiration_date": "2024-08-24T14:15:22Z",
+    		  "serial_numbers": [],
+    		  "is_dangerous_goods": false
+    		}
+    	  ]
+    	}
+      ],
+      "parent_cartons": [],
+      "measurements": {
+        "total_weight_oz": 5,
+        "length_in": 6,
+        "width_in": 5,
+        "depth_in": 4
+      },
+      "require_signature": false,
+      "estimated_fulfillment_date": "2024-04-09T06:59:59+00:00",
+      "actual_fulfillment_date": "2024-04-08T12:11:18.0516082+00:00",
+      "estimated_fulfillment_date_status": "FulfilledOnTime",
+      "is_tracking_uploaded": false,
+      "gift_message": "test message",
+      "delivery_date": null
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Body sample for shipment_onhold topic:" defaultOpen={false}>
+    ```
+    {
+      "id": 101198202,
+      "order_id": 15947699,
+      "reference_id": "ORD-1234",
+      "recipient": {
+        "name": "John Doe",
+        "full_name": "John Doe",
+        "address": {
+          "address1": "123 Main St",
+          "address2": "Suite 100",
+          "company_name": "Wayne Enterprises",
+          "city": "Anytown",
+          "state": "NY",
+          "country": "US",
+          "zip_code": "12345"
+        },
+        "email": "john.doe@example.com",
+        "phone_number": "123-456-7890"
+      },
+      "created_date": "2024-04-08T05:50:26.9451275+00:00",
+      "last_update_at": null,
+      "last_tracking_update_at": null,
+      "status": "OnHold",
+      "status_details": [
+        {
+          "name": "PackagePreferenceNotSet",
+          "description": "No Package Preference Set For Inventory",
+          "id": 407,
+          "inventory_id": 4309409,
+          "exception_fulfillment_center_id": null,
+          "extra_information": null
+        }
+      ],
+      "location": {
+        "id": 17,
+        "name": "Grapevine 2 (TX)"
+      },
+      "invoice_amount": 0,
+      "invoice_currency_code": "USD",
+      "insurance_value": 0,
+      "ship_option": "Ground",
+      "package_material_type": "Box",
+      "tracking": null,
+      "products": [
+        {
+          "id": 4725516,
+          "reference_id": "TShirtBlueM",
+          "name": "Medium Blue T-Shirt",
+          "sku": "TShirtBlueM",
+          "inventory_items": [
+            {
+              "id": 5264253,
+              "name": "Medium Blue T-Shirt",
+              "quantity": 1,
+              "quantity_committed": 0,
+              "lot": "22222",
+              "expiration_date": "2019-08-24T14:15:22Z",
+              "serial_numbers": [],
+              "is_dangerous_goods": false
+            }
+          ]
+        }
+      ],
+      "parent_cartons": [],
+      "measurements": {
+        "total_weight_oz": 5,
+        "length_in": 6,
+        "width_in": 5,
+        "depth_in": 4
+      },
+      "require_signature": false,
+      "estimated_fulfillment_date": null,
+      "actual_fulfillment_date": null,
+      "estimated_fulfillment_date_status": "AwaitingReset",
+      "is_tracking_uploaded": false,
+      "gift_message": "test message",
+      "delivery_date": null
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
