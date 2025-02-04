@@ -38,7 +38,7 @@
             "pages": [
                 {
                     "group": "Channels",
-                    "name": "experimental",
+                    "version": "experimental",
                     "pages": [
                       "api-reference/channels/get-user-authorized-channel-info"
                     ]
