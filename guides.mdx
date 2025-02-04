@@ -352,3 +352,56 @@ Additionally, the [GET WRO Boxes](https://developer.shipbob.com/api-docs/#tag/R
 ### [](https://developer.shipbob.com/guides/#assumptions--considerations)Assumptions & Considerations
 
 * WRO configuration updates are not supported via the ShipBob API. There is no API endpoint to update a WRO once it has been created.
+
+```mermaid
+graph TD
+    %% WRO Creation Process
+    A[Create Warehouse Receiving Order (WRO)] -->|Provide Required Fields| B[ShipBob WRO POST Endpoint]
+
+    %% Required Fields Breakdown
+    B --> C[Package Type]
+    B --> D[Expected Arrival Date]
+    B --> E[ShipBob Inventory ID]
+    B --> F[Purchase Order Number]
+    B --> G[Tracking Number]
+
+    %% Package Type Details
+    C -->|Pallet| C1[Include pallet tracking number & contents in box array]
+    C -->|Package| C2[Provide contents & tracking for each package (max 50 boxes)]
+    C -->|Floor Loaded Container| C3[Provide full container contents in one box & tracking]
+
+    %% Expected Arrival Date
+    D -->|Must be in the future| D1[Otherwise, request fails with 400 error]
+
+    %% ShipBob Inventory ID Requirements
+    E -->|Product must exist in ShipBob WMS| E1[Check via Product GET API]
+    E1 -->|If not found, create product| E2[Use Product POST API to get inventory_id]
+    E -->|Alternative| E3[Store ShipBob inventory_id upstream]
+
+    %% Purchase Order Number
+    F -->|Unique PO number or shipment number| F1[Required for WRO creation]
+
+    %% Tracking Number
+    G -->|Provide scannable carton ID| G1[Used by ShipBob operations at warehouse]
+
+    %% WRO Status Updates
+    H[Check WRO Status] -->|Use Warehouse Receiving Order GET API| I[Fetch WROs by status or record]
+    
+    %% WRO Status Breakdown
+    I -->|"statuses" parameter| J[Fetch WROs in Awaiting, Arrived, Processing, or Completed]
+    I -->|"PurchaseOrderNumbers" parameter| K[Fetch specific WROs based on PO number]
+
+    %% Status Progression
+    J -->|Default status| L[Awaiting]
+    L -->|WRO physically arrives & scanned| M[Arrived or PartiallyArrived]
+    M -->|Stowing begins| N[Processing]
+    N -->|Stowed quantity updates in inventory_items array| N1[Monitor stowed_quantity until complete]
+    N -->|All stowing completed| O[Completed]
+
+    %% Additional WRO Tracking
+    I -->|Fetch status per box| P[Use GET WRO Boxes API]
+    P -->|Includes received quantities per box| P1[Track received inventory per box]
+
+    %% Assumptions & Considerations
+    Q[WRO Configuration Updates Not Supported] -->|No API endpoint to update WRO| R[Must create a new WRO if changes needed]
+```
