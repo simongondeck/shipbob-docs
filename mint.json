@@ -19,16 +19,14 @@
     "topbar": {
       "style": "default"
     },
-    {
-      "tabs": [
-        {
-          "name": "API Reference",
-          "url": "reference",
-          "version": "experimental",
-          "openapi": "https://globalinventoryapi-dev.shipbob.dev/swagger/v3/swagger.json"
-        }
-      ]
-    }
+    "tabs": [
+      {
+        "name": "API Reference",
+        "url": "reference",
+        "version": "experimental",
+        "openapi": "https://globalinventoryapi-dev.shipbob.dev/swagger/v3/swagger.json"
+      }
+    ]
     "anchors": [],
     "navigation": [
         {
