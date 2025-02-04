@@ -38,3 +38,57 @@ sequenceDiagram
     Backend->>StripeAPI: Update subscription's default payment method
     Frontend-->>Backend: Display payment confirmation
 ```
+
+```mermaid
+graph TD
+    %% Order Creation Process
+    A[Create ShipBob Order] -->|Provide Required Fields| B[ShipBob Order POST Endpoint]
+
+    %% Required Fields Breakdown
+    B --> C[Shipping Method]
+    B --> D[Recipient Name]
+    B --> E[Recipient Address]
+    B --> F[Reference ID]
+    B --> G[Optional Order Number]
+    B --> H[Products]
+    B --> I[Order Tags]
+    B --> J[shipbob_channel_id]
+
+    %% Shipping Method Details
+    C -->|Standard, Expedited, 2-Day, etc.| C1[Merchant Maps to Ship Option]
+
+    %% Recipient Address Details
+    E -->|Address1, City, Country| E1[Required]
+    E -->|Optional: City & Zip Code| E2[Pass if available]
+
+    %% Reference ID
+    F -->|Unique order number from platform| F1[Must be unique within ShipBob]
+
+    %% Optional Order Number
+    G -->|More user-friendly| G1[Can be used for customer support]
+
+    %% Product Methods
+    H -->|Choose Product Model| H1[Reference ID Model or Product ID Model]
+    
+    %% Reference ID Model
+    H1 -->|Recommended| I1[Pass SKU & Product Name]
+    I1 -->|Check if product exists| I2[Auto-create product if not found]
+
+    %% Product ID Model
+    H1 -->|Requires existing Product ID| J1[Retrieve ShipBob ProductId]
+    J1 -->|Store & use ProductId| J2[Ensure products are created first]
+
+    %% Order Tags
+    I -->|Tags store additional data| I3[Used for automation rules]
+    I3 -->|Trigger rules based on tag names| I4[Example: AddMarketingInsert]
+
+    %% shipbob_channel_id Requirement
+    J -->|Must be in request header| J3[Required for successful order creation]
+    J3 -->|Use GET Channel API to find write permissions| J4[Write access to own integration channel]
+
+    %% Order Creation
+    H --> K[Order Created in ShipBob]
+
+    %% API Documentation Note
+    K -->|Toggle between models in API docs| L[Expand Product Node]
+```
