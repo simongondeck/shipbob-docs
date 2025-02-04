@@ -56,3 +56,13 @@ sequenceDiagram
     Backend->>StripeAPI: Update subscription's default payment method
     Frontend-->>Backend: Display payment confirmation
 ```
+
+```mermaid
+graph TD
+    A[Frontend] -->|Collect payment info & confirm intent| B[Stripe API]
+    B:::stripe -->|Payment is attempted| C[Payment succeeds]
+    C -->|Update subscription's payment method| D[Backend]
+    D -->|Display payment confirmation| A
+
+    classDef stripe fill:#ADD8E6,stroke:#000,stroke-width:2px;
+```
