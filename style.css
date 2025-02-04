@@ -10,3 +10,9 @@ table tbody tr:nth-of-type(even) {
 #sidebar div div div a img {
 	/* height: 2rem !important; */
 }
+
+.mermaid .actor {
+    fill: #ADD8E6 !important; /* Light blue */
+    stroke: #000 !important; /* Black border */
+    font-weight: bold !important;
+}

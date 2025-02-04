@@ -66,3 +66,16 @@ graph TD
 
     classDef stripe fill:#ADD8E6,stroke:#000,stroke-width:2px;
 ```
+
+```mermaid
+%%{init: {'themeVariables': {'actorBkg': '#ADD8E6', 'actorTextColor': '#000'}}}%%
+sequenceDiagram
+    participant Frontend
+    participant Backend
+    participant StripeAPI as Stripe API
+
+    Frontend->>StripeAPI: Payment is attempted
+    StripeAPI-->>Frontend: Payment succeeds
+    Backend->>StripeAPI: Update subscription's default payment method
+    Frontend-->>Backend: Display payment confirmation
+```
