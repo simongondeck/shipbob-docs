@@ -8,5 +8,5 @@ table tbody tr:nth-of-type(even) {
 }
 
 #sidebar div div div a img {
-	height: 2rem !important;
+	/* height: 2rem !important; */
 }
