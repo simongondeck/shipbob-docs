@@ -44,3 +44,15 @@ The fastest way to get support with your integration is to contact [developers@s
     %% subgraph2 inherits the direction of the top-level graph (LR)
     outside ---> top2
 ```
+
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant Backend
+    participant StripeAPI as Stripe API
+
+    Frontend->>StripeAPI: Payment is attempted
+    StripeAPI-->>Frontend: Payment succeeds
+    Backend->>StripeAPI: Update subscription's default payment method
+    Frontend-->>Backend: Display payment confirmation
+```
