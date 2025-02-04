@@ -174,7 +174,20 @@ A product in ShipBob is a fulfillable item that will exist on orders and shipmen
 
 When creating a product under the channel that you have write access to, you are creating a channel product, or a digital representation of a physical good. A channel product will be associated with an inventory item, which is the physical representation of that good that holds inventory levels and other item attributes. Since a channel product is a digital representation, it is possible for that same item to exist across various different channels.
 
-![Channel Products](https://developer.shipbob.com/images/channel_products.png)
+```mermaid
+graph TD
+    %% Integration Sources
+    A["Your Integration"] -->|Your Channel| B["Channel Product (SKU123, productId 1111)"]
+    
+    %% Merchant Integrations
+    C["Merchant Integration 2 (Shopify Store)"] -->|Shopify Channel| D["Channel Product (SKU123, productId 1112)"]
+    E["Merchant Integration 3 (Magento Store)"] -->|Magento Channel| F["Channel Product (SKU123, productId 1113)"]
+
+    %% ShipBob Inventory
+    B --> G["ShipBob Inventory Item (SKU123, inventoryId 4444)"]
+    D --> G
+    F --> G
+```
 
 As an example, if your integration creates a channel product “SKU123”, the merchant could also be connected between ShipBob and other integrations, such as Shopify, BigCommerce, Magento, NetSuite, etc. Each of these integrations manages their own channel products, so “SKU123” could be a channel product for each of those integrations as well. Each channel product will resolve to the same **inventory item**, which is the item that is visible in the ShipBob UI. As a result, despite multiple channel products for the same item existing, you will only see the one inventory item when searching for “SKU123” in the ShipBob UI:
 
