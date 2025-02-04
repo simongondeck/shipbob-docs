@@ -142,11 +142,11 @@
     "theme": "venus",
     "versions": [
       {
-        "name": "v1",
+        "name": "stable",
         "default": true
       },
       {
-        "name": "beta"
+        "name": "experimental"
       }
     ]
   }

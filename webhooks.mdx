@@ -50,8 +50,6 @@ Your endpoint shouldn’t expect delivery of these events in this order in case 
 
 ## Topics
 
-\--insert--
-
 | **Topic Name**      | **Description**                                                                                                                                                                                                                                                                                                      | **Scopes Required**                |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
 | order\_shipped      | Sends the full order payload when the label is purchased, printed, and placed on box for carrier pickup. While the tracking # will be available, there may be a delay while carriers scan in the package. If the order is split into multiple shipments, this will fire for each shipment that is part of the order. | orders\_read                       |
@@ -79,158 +77,158 @@ Header:
 
 Unless specified in the table above, the webhook notification sends the full data model of the underlying resource, that is available in the GET endpoint.
 
-<Accordion title="Body sample for order_shipped topic:" defaultOpen={false}>
-  ```
-  {
-    "id": 15949208,
-    "created_date": "2024-04-08T10:25:53.9009945+00:00",
-    "purchase_date": "2024-04-08T10:25:53.9009945+00:00",
-    "reference_id": "ORD-12348",
-    "order_number": "ORD-12348",
-    "status": "Processing",
-    "type": "DTC",
-    "channel": {
-      "id": 55176,
-      "name": "Privileged Access Token Thursday, February 9, 2023"
-    },
-    "shipping_method": "Standard",
-    "recipient": {
-      "name": "John Doe co Wayne Enterprises",
-      "address": {
-        "address1": "123 Main St",
-        "address2": "Suite 100",
-        "company_name": "Wayne Enterprises",
-        "city": "Anytown",
-        "state": "NY",
-        "country": "US",
-        "zip_code": "12345"
-      },
-      "email": "john.doe@example.com",
-      "phone_number": "123-456-7890"
-    },
-    "products": [
-      {
-     "id": 4725516,
-        "reference_id": "TShirtBlueM",
-        "quantity": 4,
-        "quantity_unit_of_measure_code": "EA",
-        "sku": "TShirtBlueM",
-        "gtin": "string",
-        "upc": "string",
-        "unit_price": 0.1,
-        "external_line_id": 0
-      }
-    ],
-    "tags": [
-      {
-        "name": "Handling instructions",
-        "value": "Fragile"
-      }
-    ],
-    "shipments": [
-      {
-        "id": 101199713,
-        "order_id": 15949208,
-        "reference_id": "ORD-12348",
-        "recipient": {
-          "name": "John Doe co Wayne Enterprises",
-          "full_name": "John Doe",
-          "address": {
-            "address1": "123 Main St",
-            "address2": "Suite 100",
-            "company_name": "Wayne Enterprises",
-            "city": "Anytown",
-            "state": "NY",
-            "country": "US",
-            "zip_code": "12345"
-          },
-          "email": "john.doe@example.com",
-          "phone_number": "123-456-7890"
-        },
-        "created_date": "2024-04-08T11:13:56.9924495+00:00",
-        "last_update_at": "2024-04-08T11:17:07.122+00:00",
-        "last_tracking_update_at": "2024-04-08T15:17:05+00:00",
-        "status": "LabeledCreated",
-        "status_details": [],
-        "location": {
-          "id": 10,
-          "name": "Moreno Valley (CA)"
-        },
-        "invoice_amount": 6.41,
-        "invoice_currency_code": "USD",
-        "insurance_value": null,
-        "ship_option": "Ground",
-        "package_material_type": "Box",
-        "tracking": {
-          "carrier": "OSMWorldwide",
-          "tracking_number": "9261290306529427911297",
-          "carrier_service": "ParcelSelect",
-          "tracking_url": "https://tools.usps.com/go/TrackConfirmAction!input.action?tRef=qt&tLc=0&tLabels=9261290306529427911297",
-          "bol": "string",
-          "shipping_date": null,
-          "pro_number": "string",
-          "scac": "string"
-        },
-        "products": [
-          {
-            "id": 4725516,
-            "reference_id": "TShirtBlueM",
-            "name": "Medium Blue T-Shirt",
-            "sku": "TShirtBlueM",
-            "inventory_items": [
-              {
-                "id": 5264253,
-                "name": "Medium Blue T-Shirt",
-                "quantity": 4,
-                "quantity_committed": 4,
-                "lot": "22222",
-                "expiration_date": "2024-08-24T14:15:22Z",
-                "serial_numbers": [],
-                "is_dangerous_goods": true
-              }
-            ]
-          }
-        ],
-        "parent_cartons": [],
-  		"measurements": {
-  		  "total_weight_oz": 5,
-  		  "length_in": 6,
-  		  "width_in": 5,
-  		  "depth_in": 4
-  		},
-        "require_signature": false,
-        "estimated_fulfillment_date": "2024-04-09T06:59:59+00:00",
-        "actual_fulfillment_date": "2024-04-08T11:17:07.122+00:00",
-        "estimated_fulfillment_date_status": "FulfilledOnTime",
-        "is_tracking_uploaded": false,
-        "gift_message": "test message",
-        "delivery_date": null
-      }
-    ],
-    "gift_message": null,
-    "shipping_terms": {
-      "carrier_type": null,
-      "payment_term": null
-    },
-    "retailer_program_data": {
-      "purchase_order_number": null,
-      "retailer_program_type": null,
-      "mark_for_store": null,
-      "department": null,
-      "delivery_date": null,
-      "addresses": [],
-      "customer_ticket_number": null,
-      "ship_by_date": null,
-      "do_not_ship_before_date": null
-    },
-    "financials": {
-      "total_price": 5.85
-    }
-  }
-  ```
-</Accordion>
-
 <AccordionGroup>
+  <Accordion title="Body sample for order_shipped topic:" defaultOpen={false}>
+    ```
+    {
+      "id": 15949208,
+      "created_date": "2024-04-08T10:25:53.9009945+00:00",
+      "purchase_date": "2024-04-08T10:25:53.9009945+00:00",
+      "reference_id": "ORD-12348",
+      "order_number": "ORD-12348",
+      "status": "Processing",
+      "type": "DTC",
+      "channel": {
+        "id": 55176,
+        "name": "Privileged Access Token Thursday, February 9, 2023"
+      },
+      "shipping_method": "Standard",
+      "recipient": {
+        "name": "John Doe co Wayne Enterprises",
+        "address": {
+          "address1": "123 Main St",
+          "address2": "Suite 100",
+          "company_name": "Wayne Enterprises",
+          "city": "Anytown",
+          "state": "NY",
+          "country": "US",
+          "zip_code": "12345"
+        },
+        "email": "john.doe@example.com",
+        "phone_number": "123-456-7890"
+      },
+      "products": [
+        {
+       "id": 4725516,
+          "reference_id": "TShirtBlueM",
+          "quantity": 4,
+          "quantity_unit_of_measure_code": "EA",
+          "sku": "TShirtBlueM",
+          "gtin": "string",
+          "upc": "string",
+          "unit_price": 0.1,
+          "external_line_id": 0
+        }
+      ],
+      "tags": [
+        {
+          "name": "Handling instructions",
+          "value": "Fragile"
+        }
+      ],
+      "shipments": [
+        {
+          "id": 101199713,
+          "order_id": 15949208,
+          "reference_id": "ORD-12348",
+          "recipient": {
+            "name": "John Doe co Wayne Enterprises",
+            "full_name": "John Doe",
+            "address": {
+              "address1": "123 Main St",
+              "address2": "Suite 100",
+              "company_name": "Wayne Enterprises",
+              "city": "Anytown",
+              "state": "NY",
+              "country": "US",
+              "zip_code": "12345"
+            },
+            "email": "john.doe@example.com",
+            "phone_number": "123-456-7890"
+          },
+          "created_date": "2024-04-08T11:13:56.9924495+00:00",
+          "last_update_at": "2024-04-08T11:17:07.122+00:00",
+          "last_tracking_update_at": "2024-04-08T15:17:05+00:00",
+          "status": "LabeledCreated",
+          "status_details": [],
+          "location": {
+            "id": 10,
+            "name": "Moreno Valley (CA)"
+          },
+          "invoice_amount": 6.41,
+          "invoice_currency_code": "USD",
+          "insurance_value": null,
+          "ship_option": "Ground",
+          "package_material_type": "Box",
+          "tracking": {
+            "carrier": "OSMWorldwide",
+            "tracking_number": "9261290306529427911297",
+            "carrier_service": "ParcelSelect",
+            "tracking_url": "https://tools.usps.com/go/TrackConfirmAction!input.action?tRef=qt&tLc=0&tLabels=9261290306529427911297",
+            "bol": "string",
+            "shipping_date": null,
+            "pro_number": "string",
+            "scac": "string"
+          },
+          "products": [
+            {
+              "id": 4725516,
+              "reference_id": "TShirtBlueM",
+              "name": "Medium Blue T-Shirt",
+              "sku": "TShirtBlueM",
+              "inventory_items": [
+                {
+                  "id": 5264253,
+                  "name": "Medium Blue T-Shirt",
+                  "quantity": 4,
+                  "quantity_committed": 4,
+                  "lot": "22222",
+                  "expiration_date": "2024-08-24T14:15:22Z",
+                  "serial_numbers": [],
+                  "is_dangerous_goods": true
+                }
+              ]
+            }
+          ],
+          "parent_cartons": [],
+    		"measurements": {
+    		  "total_weight_oz": 5,
+    		  "length_in": 6,
+    		  "width_in": 5,
+    		  "depth_in": 4
+    		},
+          "require_signature": false,
+          "estimated_fulfillment_date": "2024-04-09T06:59:59+00:00",
+          "actual_fulfillment_date": "2024-04-08T11:17:07.122+00:00",
+          "estimated_fulfillment_date_status": "FulfilledOnTime",
+          "is_tracking_uploaded": false,
+          "gift_message": "test message",
+          "delivery_date": null
+        }
+      ],
+      "gift_message": null,
+      "shipping_terms": {
+        "carrier_type": null,
+        "payment_term": null
+      },
+      "retailer_program_data": {
+        "purchase_order_number": null,
+        "retailer_program_type": null,
+        "mark_for_store": null,
+        "department": null,
+        "delivery_date": null,
+        "addresses": [],
+        "customer_ticket_number": null,
+        "ship_by_date": null,
+        "do_not_ship_before_date": null
+      },
+      "financials": {
+        "total_price": 5.85
+      }
+    }
+    ```
+  </Accordion>
+
   <Accordion title="Body sample for shipment_delivered topic:" defaultOpen={false}>
     ```
     {
@@ -399,6 +397,163 @@ Unless specified in the table above, the webhook notification sends the full dat
       "estimated_fulfillment_date": null,
       "actual_fulfillment_date": null,
       "estimated_fulfillment_date_status": "AwaitingReset",
+      "is_tracking_uploaded": false,
+      "gift_message": "test message",
+      "delivery_date": null
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Body sample for shipment_exception topic:" defaultOpen={false}>
+    ```
+    {
+      "id": 101198202,
+      "order_id": 15947699,
+      "reference_id": "ORD-1234",
+      "recipient": {
+        "name": "John Doe",
+        "full_name": "John Doe",
+        "address": {
+          "address1": "123 Main St",
+          "address2": "Suite 100",
+          "company_name": "Wayne Enterprises",
+          "city": "Anytown",
+          "state": "NY",
+          "country": "US",
+          "zip_code": "12345"
+        },
+        "email": "john.doe@example.com",
+        "phone_number": "123-456-7890"
+      },
+      "created_date": "2024-04-08T05:50:26.9451275+00:00",
+      "last_update_at": null,
+      "last_tracking_update_at": null,
+      "status": "Exception",
+      "status_details": [
+        {
+          "name": "OutOfStock",
+          "description": "No Stock On Hand For Sku",
+          "id": 303,
+          "inventory_id": 5264253,
+          "exception_fulfillment_center_id": 17,
+          "extra_information": null
+        }
+      ],
+      "location": {
+        "id": 17,
+        "name": "Grapevine 2 (TX)"
+      },
+      "invoice_amount": 0,
+      "invoice_currency_code": "USD",
+      "insurance_value": 0,
+      "ship_option": "Ground",
+      "package_material_type": "Box",
+      "tracking": null,
+      "products": [
+        {
+          "id": 4725516,
+          "reference_id": "TShirtBlueM",
+          "name": "Medium Blue T-Shirt",
+          "sku": "TShirtBlueM",
+          "inventory_items": [
+            {
+              "id": 5264253,
+              "name": "Medium Blue T-Shirt",
+              "quantity": 1,
+              "quantity_committed": 0,
+              "lot": "22222",
+              "expiration_date": "2019-08-24T14:15:22Z",
+              "serial_numbers": [],
+              "is_dangerous_goods": false
+            }
+          ]
+        }
+      ],
+      "parent_cartons": [],
+      "measurements": {
+        "total_weight_oz": 5,
+        "length_in": 6,
+        "width_in": 5,
+        "depth_in": 4
+      },
+      "require_signature": false,
+      "estimated_fulfillment_date": null,
+      "actual_fulfillment_date": null,
+      "estimated_fulfillment_date_status": "AwaitingReset",
+      "is_tracking_uploaded": false,
+      "gift_message": "test message",
+      "delivery_date": null
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Body sample for shipment_cancelled topic:" defaultOpen={false}>
+    ```
+    {
+      "id": 101198202,
+      "order_id": 15947699,
+      "reference_id": "ORD-1234",
+      "recipient": {
+        "name": "John Doe",
+        "full_name": "John Doe",
+        "address": {
+          "address1": "123 Main St",
+          "address2": "Suite 100",
+          "company_name": "Wayne Enterprises",
+          "city": "Anytown",
+          "state": "NY",
+          "country": "US",
+          "zip_code": "12345"
+        },
+        "email": "john.doe@example.com",
+        "phone_number": "123-456-7890"
+      },
+      "created_date": "2024-04-08T05:50:26.9451275+00:00",
+      "last_update_at": null,
+      "last_tracking_update_at": null,
+      "status": "Cancelled",
+      "status_details": [],
+      "location": {
+        "id": 17,
+        "name": "Grapevine 2 (TX)"
+      },
+      "invoice_amount": 0,
+      "invoice_currency_code": "USD",
+      "insurance_value": 0,
+      "ship_option": "Ground",
+      "package_material_type": "Box",
+      "tracking": null,
+      "products": [
+      {
+    	  "id": 4725516,
+    	  "reference_id": "TShirtBlueM",
+    	  "name": "Medium Blue T-Shirt",
+    	  "sku": "TShirtBlueM",
+    	  "inventory_items": [
+    		{
+    		  "id": 5264253,
+    		  "name": "Medium Blue T-Shirt",
+    		  "quantity": 4,
+    		  "quantity_committed": 0,
+    		  "lot": "22222",
+    		  "expiration_date": "2024-08-24T14:15:22Z",
+    		  "serial_numbers": [],
+    		  "is_dangerous_goods": true
+    		}
+    	  ]
+    	}
+      ],
+      "parent_cartons": [],
+      "measurements": {
+        "total_weight_oz": 6,
+        "length_in": 6,
+        "width_in": 5,
+        "depth_in": 4
+      },
+      "require_signature": false,
+      "estimated_fulfillment_date": null,
+      "actual_fulfillment_date": null,
+      "estimated_fulfillment_date_status": "Unavailable",
       "is_tracking_uploaded": false,
       "gift_message": "test message",
       "delivery_date": null
