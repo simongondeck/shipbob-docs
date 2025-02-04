@@ -30,8 +30,7 @@
                 "authentication",
                 "webhooks",
                 "sandbox-simulations",
-                "tools",
-                "release-notes"
+                "tools"
             ]
         },
         {
