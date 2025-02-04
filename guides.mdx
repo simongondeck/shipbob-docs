@@ -355,30 +355,6 @@ The [WRO POST request](https://developer.shipbob.com/api-docs/#tag/Receiving/pa
 
 * Provide the scannable carton ID in the tracking\_number field for each box/pallet that the ShipBob operations team can physically scan when the WRO arrives at the warehouse.
 
-### [](https://developer.shipbob.com/guides/#details-on-wro-status-updates)Details on WRO Status Updates
-
-ShipBob’s GET Warehouse Receiving Order API will allow an on-demand fetch of WROs within a ShipBob account and the current status associated with each individual WRO.
-
-Several parameters can be used to fetch WROs by status or by specific WRO record:
-
-* The “statuses” parameter can be used to fetch WROs that are in various statuses, such as Arrived, Processing, Completed.
-
-  * When a WRO is first created, the status will default to “Awaiting”. Once the WRO has physically arrived at the warehouse and has been scanned by the Operations team, the status will update to “Arrived” or “PartiallyArrived”.
-
-  * A Completed status means that all stowing has been completed and no further action will be taken against the WRO record.
-
-  * A Processing status means that stowing is taking place; the “stowed\_quantity” field within the “inventory\_items” array will continually increase until stowing is complete for a product.
-
-* The PurchaseOrderNumbers parameter can return specific WRO records associated with the purchase order numbers passed during the WRO creation.
-
-Depending on the use-case, the integration can continuously poll a WRO and monitor the “stowed\_quantity” for each product as the stowing occurs during the WRO’s Processing status, or wait until the WRO is in Completed status before updating inventory in the upsteam platform.
-
-Additionally, the [GET WRO Boxes](https://developer.shipbob.com/api-docs/#tag/Receiving/paths/~12.0~1receiving~1%7Bid%7D~1boxes/get) endpoint can be used to fetch the status for each box individually, which will also include the received quantities per box.
-
-### [](https://developer.shipbob.com/guides/#assumptions--considerations)Assumptions & Considerations
-
-* WRO configuration updates are not supported via the ShipBob API. There is no API endpoint to update a WRO once it has been created.
-
 ```mermaid
 graph TD
     %% Order Creation Process
@@ -432,6 +408,30 @@ graph TD
     %% API Documentation Note
     K -->|"Toggle between models in API docs"| L["Expand Product Node (API Guide)"]
 ```
+
+### [](https://developer.shipbob.com/guides/#details-on-wro-status-updates)Details on WRO Status Updates
+
+ShipBob’s GET Warehouse Receiving Order API will allow an on-demand fetch of WROs within a ShipBob account and the current status associated with each individual WRO.
+
+Several parameters can be used to fetch WROs by status or by specific WRO record:
+
+* The “statuses” parameter can be used to fetch WROs that are in various statuses, such as Arrived, Processing, Completed.
+
+  * When a WRO is first created, the status will default to “Awaiting”. Once the WRO has physically arrived at the warehouse and has been scanned by the Operations team, the status will update to “Arrived” or “PartiallyArrived”.
+
+  * A Completed status means that all stowing has been completed and no further action will be taken against the WRO record.
+
+  * A Processing status means that stowing is taking place; the “stowed\_quantity” field within the “inventory\_items” array will continually increase until stowing is complete for a product.
+
+* The PurchaseOrderNumbers parameter can return specific WRO records associated with the purchase order numbers passed during the WRO creation.
+
+Depending on the use-case, the integration can continuously poll a WRO and monitor the “stowed\_quantity” for each product as the stowing occurs during the WRO’s Processing status, or wait until the WRO is in Completed status before updating inventory in the upsteam platform.
+
+Additionally, the [GET WRO Boxes](https://developer.shipbob.com/api-docs/#tag/Receiving/paths/~12.0~1receiving~1%7Bid%7D~1boxes/get) endpoint can be used to fetch the status for each box individually, which will also include the received quantities per box.
+
+### [](https://developer.shipbob.com/guides/#assumptions--considerations)Assumptions & Considerations
+
+* WRO configuration updates are not supported via the ShipBob API. There is no API endpoint to update a WRO once it has been created.
 
 ```mermaid
 graph TD
