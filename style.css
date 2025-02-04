@@ -11,7 +11,10 @@ table tbody tr:nth-of-type(even) {
 	/* height: 2rem !important; */
 }
 
-.mermaid {
-  background-image: url('https://img.freepik.com/premium-vector/graph-paper-checkered-background-vector-illustration-isolated-white-backdrop-light-blue-grid-notebook-sheet-texture-back-school-banner-template_718664-1180.jpg') !important;
-    padding: 3rem 1.5rem !important;
+.mermaid div {
+    background-color: #F8F9FF;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 16px 16px;
+    border-radius: 10px;
+    padding: 3rem 2rem;
 }
