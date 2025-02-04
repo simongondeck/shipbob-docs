@@ -127,7 +127,7 @@ graph TD
 
     %% API Documentation Note
     K -->|Toggle between models in API docs| L[Expand Product Node]
-
+```
 
 ***
 
@@ -383,25 +383,25 @@ graph TD
 
     %% Tracking Number
     G -->|Provide scannable carton ID| G1[Used by ShipBob operations at warehouse]
+```
 
+```mermaid
+graph TD
     %% WRO Status Updates
-    H[Check WRO Status] -->|Use Warehouse Receiving Order GET API| I[Fetch WROs by status or record]
+    H["Check WRO Status (via GET API)"] -->|"Use Warehouse Receiving Order GET API"| I["Fetch WROs (by status or record)"]
     
     %% WRO Status Breakdown
-    I -->|"statuses" parameter| J[Fetch WROs in Awaiting, Arrived, Processing, or Completed]
-    I -->|"PurchaseOrderNumbers" parameter| K[Fetch specific WROs based on PO number]
+    I -->|"statuses parameter"| J["Fetch WROs in (Awaiting, Arrived, Processing, Completed)"]
+    I -->|"PurchaseOrderNumbers parameter"| K["Fetch specific WROs (based on PO number)"]
 
     %% Status Progression
-    J -->|Default status| L[Awaiting]
-    L -->|WRO physically arrives & scanned| M[Arrived or PartiallyArrived]
-    M -->|Stowing begins| N[Processing]
-    N -->|Stowed quantity updates in inventory_items array| N1[Monitor stowed_quantity until complete]
-    N -->|All stowing completed| O[Completed]
+    J -->|"Default status"| L["Awaiting"]
+    L -->|"WRO physically arrives & scanned"| M["Arrived or PartiallyArrived"]
+    M -->|"Stowing begins"| N["Processing (stowing in progress)"]
+    N -->|"stowed_quantity updates in inventory_items array"| N1["Monitor stowed_quantity until complete"]
+    N -->|"All stowing completed"| O["Completed (final status)"]
 
     %% Additional WRO Tracking
-    I -->|Fetch status per box| P[Use GET WRO Boxes API]
-    P -->|Includes received quantities per box| P1[Track received inventory per box]
-
-    %% Assumptions & Considerations
-    Q[WRO Configuration Updates Not Supported] -->|No API endpoint to update WRO| R[Must create a new WRO if changes needed]
+    I -->|"Fetch status per box"| P["Use GET WRO Boxes API"]
+    P -->|"Includes received quantities per box"| P1["Track received inventory per box"]
 ```
