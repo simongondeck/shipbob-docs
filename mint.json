@@ -5,11 +5,6 @@
       "dark": "/logo/dark.png" 
     },
     "favicon": "/favicon.png",
-    "styling": {
-      "rounded": "sharp",
-      "eyebrows": "breadcrumbs",
-      "codeblocks": "dark"
-    },
     "background": {
       "style": "windows"
     },
@@ -24,7 +19,16 @@
     "topbar": {
       "style": "default"
     },
-    "tabs": [],
+    {
+      "tabs": [
+        {
+          "name": "API Reference",
+          "url": "reference",
+          "version": "experimental",
+          "openapi": "https://globalinventoryapi-dev.shipbob.dev/swagger/v3/swagger.json"
+        }
+      ]
+    }
     "anchors": [],
     "navigation": [
         {
