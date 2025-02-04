@@ -26,49 +26,8 @@ You can find open source OAuth libraries for hybrid flow [here](https://openid.n
 ## Getting Support
 The fastest way to get support with your integration is to contact [developers@shipbob.com](developers@shipbob.com) with a detailed description of your issue or question (request samples encouraged if relevant!)
 
-```mermaid
-  flowchart LR
-    subgraph subgraph1
-        direction TB
-        top1[top] --> bottom1[bottom]
-    end
-    subgraph subgraph2
-        direction TB
-        top2[top] --> bottom2[bottom]
-    end
-    %% ^ These subgraphs are identical, except for the links to them:
-
-    %% Link *to* subgraph1: subgraph1 direction is maintained
-    outside --> subgraph1
-    %% Link *within* subgraph2:
-    %% subgraph2 inherits the direction of the top-level graph (LR)
-    outside ---> top2
-```
 
 ```mermaid
-sequenceDiagram
-    participant Frontend
-    participant Backend
-    participant StripeAPI as Stripe API
-
-    Frontend->>StripeAPI: Payment is attempted
-    StripeAPI-->>Frontend: Payment succeeds
-    Backend->>StripeAPI: Update subscription's default payment method
-    Frontend-->>Backend: Display payment confirmation
-```
-
-```mermaid
-graph TD
-    A[Frontend] -->|Collect payment info & confirm intent| B[Stripe API]
-    B:::stripe -->|Payment is attempted| C[Payment succeeds]
-    C -->|Update subscription's payment method| D[Backend]
-    D -->|Display payment confirmation| A
-
-    classDef stripe fill:#ADD8E6,stroke:#000,stroke-width:2px;
-```
-
-```mermaid
-%%{init: {'themeVariables': {'actorBkg': '#ADD8E6', 'actorTextColor': '#000'}}}%%
 sequenceDiagram
     participant Frontend
     participant Backend

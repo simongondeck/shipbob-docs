@@ -11,8 +11,7 @@ table tbody tr:nth-of-type(even) {
 	/* height: 2rem !important; */
 }
 
-.mermaid .actor {
-    fill: #ADD8E6 !important; /* Light blue */
-    stroke: #000 !important; /* Black border */
-    font-weight: bold !important;
+.mermaid {
+  background: url(https://img.freepik.com/premium-vector/graph-paper-checkered-background-vector-illustration-isolated-white-backdrop-light-blue-grid-notebook-sheet-texture-back-school-banner-template_718664-1180.jpg) !important;
+    padding: 3rem 1.5rem;
 }
