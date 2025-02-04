@@ -249,6 +249,18 @@ Within the order response, you will see an array of shipments (please refer to t
 
 Each shipment will also have a status. When a shipment has tracking details, the shipment status will be “LabeledCreated”. This status will quickly move to “Completed”. If you have a use-case that requires you to look at specific ShipBob statuses, it is recommended to use both statuses when checking for tracking details from ShipBob.
 
+```mermaid
+graph TD
+    %% Order Processing & Shipping
+    K["Order Processed & Packed"] -->|"Generate Shipping Label"| L["ShipBob Label (if Prepaid)"]
+    K -->|"Order Ready for Shipment"| M["Tracking Available"]
+
+    %% Order Tracking
+    M -->|"Retrieve Order Details"| N["GET /1.0/order/{orderId}"]
+    N -->|"Get Shipment Info"| O["GET /1.0/order/{orderId}/shipment"]
+    O -->|"Track Shipment Timeline"| P["GET /1.0/order/{orderId}/shipment/{shipmentId}/timeline"]
+```
+
 To see more detail on other statuses you may encounter, please refer to our documentation [here](https://developer.shipbob.com/).
 
 ### [](https://developer.shipbob.com/guides/#option-2--webhooks)Option 2 – Webhooks
