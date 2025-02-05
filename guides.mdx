@@ -202,6 +202,22 @@ For example, an example merchant might have a bundle called Bundle A, which corr
 
 The bundle itself also has its own SKU, such as BUNDLE123.
 
+```mermaid
+graph TD
+
+    %% Bundle Product Structure
+    A["Bundle Product (BUNDLE123)"] -->|"Contains"| B["Blue Shirt (SKU: 123123)"]
+    A -->|"Contains"| C["Red Shirt (SKU: 234234)"]
+    A -->|"Contains"| D["Hat (SKU: 345345)"]
+
+    %% Order Processing
+    E["Order Received for Bundle SKU (BUNDLE123)"] -->|"ShipBob Resolves to Inventory Items"| A
+    A -->|"Shipment Includes"| F["All Bundle Components"]
+
+    %% Bundle Setup & Management
+    G["Bundles Created in ShipBob UI"] -->|"Bundle Association Cannot Be Done via API"| H["Manual Setup Required"]
+```
+
 There are two primary options for handling bundles via ShipBob API.
 
 ### [](https://developer.shipbob.com/guides/#option-1--deconstruct-bundle-prior-to-sending-to-shipbob-preferred)Option 1 – Deconstruct bundle prior to sending to ShipBob (preferred)
