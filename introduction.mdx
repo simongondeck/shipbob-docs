@@ -65,27 +65,27 @@ Shipment statuses reflect what is happening in the physical world with the packa
 
 The most important statuses and status details are listed here:
 
-| Shipment Status | Status Detail Name        | Status Detail Description                | Status Detail ID |
-| --------------- | ------------------------- | :--------------------------------------- | :--------------- |
-| Processing      | -                         | -                                        | -                |
-| Processing      | Picked                    | Picking Completed                        | 100              |
-| Processing      | Packed                    |                                          |                  |
-| Processing      | Labeled                   |                                          |                  |
-| LabeledCreated  | -                         | -                                        | -                |
-| Completed       | Processing                | Waiting For Carrier Pickup               | 200              |
-| Completed       | InTransit                 | Shipment In Transit                      | 201              |
-| Completed       | Delivered                 | Shipment Delivered                       | 203              |
-| Completed       | DeliveryException         |                                          |                  |
-| Exception       | -                         | -                                        | -                |
-| Exception       | OutOfStock                | No Stock On Hand For Sku                 | 303              |
-| Exception       | UnknownSku                | No Sku History (if there are no reasons) | 304              |
-| Exception       | InactiveSku               |                                          |                  |
-| On Hold         | PaymentDeclined           |                                          |                  |
-| On Hold         | MissingTarriffInformation |                                          |                  |
-| On Hold         | Manual                    | Manual                                   | 405              |
-| On Hold         | InvalidAddress            | Invalid Address                          | 401              |
-| On Hold         | AutoProcessingPause       |                                          |                  |
-| Cancelled       | Cancelled                 |                                          |                  |
+| Shipment Status | Status Detail Name        | Status Detail Description                          | Status Detail ID |
+| --------------- | ------------------------- | :------------------------------------------------- | :--------------- |
+| Processing      | Picked                    | Picking Completed                                  | 100              |
+| Processing      | Packed                    | Packing Completed                                  | 101              |
+| Processing      | Labeled                   | Label Generated                                    | 102              |
+| Completed       | Processing                | Waiting For Carrier Pickup                         | 200              |
+| Completed       | InTransit                 | Shipment In Transit                                | 201              |
+| Completed       | OutForDelivery            | Shipment Out For Delivery                          | 202              |
+| Completed       | Delivered                 | Shipment Delivered                                 | 203              |
+| Completed       | DeliveryException         | OrderTracking contains CatchAll date               | 204              |
+| Exception       | InactiveSku               | Shipment Contains an inactive sku                  | 302              |
+| Exception       | OutOfStock                | No Stock On Hand For Sku                           | 303              |
+| Exception       | UnknownSku                | No Sku History (if there are no reasons)           | 304              |
+| On Hold         | PaymentDeclined           | Payment Failure                                    | 400              |
+| On Hold         | InvalidAddress            | Invalid Address                                    | 401              |
+| On Hold         | ReserveDateNotMet         | Wait For Pick Date                                 | 402              |
+| On Hold         | MissingTarriffInformation | Missing Customs Info                               | 404              |
+| On Hold         | Manual                    | Manual                                             | 405              |
+| On Hold         | InternationalHazmat       | Hazmat Inventory cannot be shipped internationally | 406              |
+| On Hold         | PackagePreferenceNotSet   | No Package Preference Set For Inventory            | 407              |
+| On Hold         | AutoProcessingPause       | Automatic Processing Pause                         | 408              |
 
 ### Order Statuses
 
