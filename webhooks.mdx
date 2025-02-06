@@ -132,11 +132,11 @@ ShipBob sends webhook notifications with the following headers:
 
 ### **Webhook Not Triggering?**
 
-* 🔹 Ensure your **subscription URL is correct** and **publicly accessible**.
+🔹 Ensure your **subscription URL is correct** and **publicly accessible**.
 
-* 🔹 Confirm your app **returns a `2XX` response** to ShipBob’s `POST` request.
+🔹 Confirm your app **returns a `2XX` response** to ShipBob’s `POST` request.
 
-* 🔹 Verify that your app **has the correct `webhooks_read` or `webhooks_write` permissions**.
+🔹 Verify that your app **has the correct `webhooks_read` or `webhooks_write` permissions**.
 
 ### **Webhook Retries Are Overloading My Server**
 
@@ -155,15 +155,3 @@ ShipBob sends webhook notifications with the following headers:
 * 🔹 Webhooks **are not guaranteed to be sent only once**.
 
 * 🔹 Implement **idempotency checks**: Store received event IDs and ignore duplicates.
-
-***
-
-## **Summary**
-
-* ✅ **Webhooks provide real-time updates** without polling.
-
-* ✅ **Handle retries & unordered delivery** in your system.
-
-* ✅ **Use HTTPS & log webhook requests** for troubleshooting.
-
-* ✅ **Test thoroughly before deploying to production.**
