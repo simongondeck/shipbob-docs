@@ -1,5 +1,15 @@
 {
     "name": "ShipBob",
+    "api": [
+      {
+        "openapi": "docs/api/openapi-v1.json",
+        "basePath": "/api/v1"
+      },
+      {
+        "openapi": "docs/api/openapi-v2.json",
+        "basePath": "/api/v2"
+      }
+    ],
     "logo": {
       "light": "/logo/light.png",
       "dark": "/logo/dark.png" 
