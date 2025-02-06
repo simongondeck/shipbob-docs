@@ -2,36 +2,38 @@
 title: "Authentication"
 ---
 
-
-# **ShipBob Authentication**  
-
 ShipBob's Developer API supports two authentication methods based on your use case:
 
-- **Personal Access Token (PAT)**: Ideal for single-user custom integrations.
-- **OAuth 2.0**: Required for multi-user applications or apps listed on our App Store.
+* **Personal Access Token (PAT)**: Ideal for single-user custom integrations.
 
-## **Choosing an Authentication Method**
+* **OAuth 2.0**: Required for multi-user applications or apps listed on our App Store.
 
-| **Method** | **Use Case** |
-|-----------|-------------|
-| **Personal Access Token (PAT)** | Single-user custom integrations. |
-| **OAuth 2.0** | Multi-user integrations or apps listed on the App Store. |
+## Choosing an Authentication Method
 
----
+| **Method**                      | **Use Case**                                             |
+| ------------------------------- | -------------------------------------------------------- |
+| **Personal Access Token (PAT)** | Single-user custom integrations.                         |
+| **OAuth 2.0**                   | Multi-user integrations or apps listed on the App Store. |
 
-## **Personal Access Token (PAT) Flow**
+***
 
-### **Generating a PAT**
+## Personal Access Token (PAT) Flow
+
+### Generating a PAT
 
 1. Log in to your **ShipBob Dashboard**.
+
 2. Generate a new **Personal Access Token** for your account.
+
 3. Use this token as a **Bearer Token** in your API requests.
 
 **Production & Sandbox Environments:**
-- [Generate PAT for Production](#)
-- [Generate PAT for Sandbox](#)
 
-### **Using a PAT**
+* [Generate PAT for Production](#)
+
+* [Generate PAT for Sandbox](#)
+
+### Using a PAT
 
 Your PAT should automatically have read and write access to the entire ShipBob account. To use it:
 
@@ -39,7 +41,8 @@ Your PAT should automatically have read and write access to the entire ShipBob a
 Authorization: Bearer [your_api_token]
 ```
 
-### **Fetching Your Channel ID**
+### Fetching Your Channel ID
+
 Before making API calls, use your PAT to get your **channel ID**:
 
 ```bash
@@ -59,29 +62,33 @@ A sample response:
 
 **Important:** PATs do not expire, so handle them securely.
 
----
+***
 
-## **OAuth Flow**
+## OAuth Flow
 
 <Steps>
   <Step title="Request OAuth Credentials">
     Fill out [this form](#) to request a **Client ID** and **Client Secret**.
   </Step>
+
   <Step title="Request User Authorization">
     Redirect users to `https://auth.shipbob.com/connect/authorize` with the required query parameters.
   </Step>
+
   <Step title="Handle Authorization Callback">
     Capture the `authorization_code` returned to your **callback URI**.
   </Step>
+
   <Step title="Exchange Code for Access Token">
     Send a `POST` request to `https://auth.shipbob.com/connect/token` to obtain an **access token**.
   </Step>
+
   <Step title="Use the Access Token">
     Include the token in API requests as a **Bearer Token**.
   </Step>
 </Steps>
 
-### **OAuth Authorization Request**
+### OAuth Authorization Request
 
 Example request to obtain user authorization:
 
@@ -92,7 +99,7 @@ GET https://auth.shipbob.com/connect/authorize?
    redirect_uri=https%3A%2F%2Fwww.myapp.com%2Fintegrate%2Fshipbob%2Fcallback
 ```
 
-### **Token Exchange Request**
+### Token Exchange Request
 
 Once the user grants access, exchange the authorization code for an access token:
 
@@ -106,7 +113,7 @@ redirect_uri=https%3A%2F%2Fwww.myapp.com%2Fintegrate%2Fshipbob%2Fcallback
 &grant_type=authorization_code
 ```
 
-### **Token Response Example**
+### Token Response Example
 
 ```json
 {
@@ -127,27 +134,27 @@ grant_type=refresh_token
 &refresh_token=your_refresh_token
 ```
 
----
+***
 
-## **Scopes Overview**
+## Scopes Overview
 
-| **Scope** | **Description** |
-|----------|----------------|
-| `orders_read` | Read orders data. |
-| `orders_write` | Create and modify orders. |
-| `products_read` | Read product details. |
-| `products_write` | Create and modify products. |
-| `fulfillments_read` | Read shipment details. |
-| `inventory_read` | Access inventory data. |
-| `channels_read` | Required for API operations. |
-| `returns_read` | Retrieve return details. |
-| `returns_write` | Create or update returns. |
-| `webhooks_read` | Read user webhooks. |
-| `webhooks_write` | Create or delete webhook subscriptions. |
+| **Scope**           | **Description**                         |
+| ------------------- | --------------------------------------- |
+| `orders_read`       | Read orders data.                       |
+| `orders_write`      | Create and modify orders.               |
+| `products_read`     | Read product details.                   |
+| `products_write`    | Create and modify products.             |
+| `fulfillments_read` | Read shipment details.                  |
+| `inventory_read`    | Access inventory data.                  |
+| `channels_read`     | Required for API operations.            |
+| `returns_read`      | Retrieve return details.                |
+| `returns_write`     | Create or update returns.               |
+| `webhooks_read`     | Read user webhooks.                     |
+| `webhooks_write`    | Create or delete webhook subscriptions. |
 
----
+***
 
-## **Retrieving Your Channel ID**
+## Retrieving Your Channel ID
 
 All API calls require a **channel ID**. Fetch it using your **access token**:
 
@@ -178,13 +185,14 @@ For multi-channel applications, identify the correct `channel_id` based on the s
 
 Use this `channel_id` in the `shipbob_channel_id` header for all subsequent API calls.
 
----
+***
 
-## **Final Notes**
+## Final Notes
 
-✅ **PATs are best for single-user integrations**.  
-✅ **OAuth is required for multi-user apps**.  
-✅ **Always use `shipbob_channel_id` in API requests**.  
-✅ **Securely handle and store authentication tokens**.  
+✅ **PATs are best for single-user integrations**.
 
-For further details, visit our [API Documentation](#). 🚀
+✅ **OAuth is required for multi-user apps**.
+
+✅ **Always use `shipbob_channel_id` in API requests**.
+
+✅ **Securely handle and store authentication tokens**.
