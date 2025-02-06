@@ -10,17 +10,19 @@ ShipBob webhooks automatically notify your app when key events occur, **eliminat
   <Step title="Subscribe to webhooks">
     Use the **Webhooks API** to subscribe to an event and define a **subscription URL**.
   </Step>
+
   <Step title="Receive Webhook Events">
     When the event occurs, ShipBob sends a `POST` request to your **subscription URL** with relevant data.
   </Step>
+
   <Step title="Acknowledge Receipt">
     Your system should return a `2XX` response to confirm successful receipt.
   </Step>
+
   <Step title="Handle Retries">
     If no `2XX` response is received, ShipBob **retries delivery for up to 24 hours** using an **exponential backoff strategy**.
   </Step>
 </Steps>
-
 
 ***
 
@@ -42,11 +44,15 @@ ShipBob webhooks automatically notify your app when key events occur, **eliminat
 
 ## **Common Use Cases**
 
-✅ **Real-time Order Tracking** - Receive `order_shipped` and `shipment_delivered` events to provide live tracking updates to customers.
-✅ **Inventory Management** - Monitor `shipment_exception` events to detect and respond to stock shortages.
-✅ **Automated Customer Notifications** - Trigger automated emails or SMS notifications when shipments are delayed (`shipment_onhold`) or delivered (`shipment_delivered`).
-✅ **Order Cancellation Handling** - Use `shipment_cancelled` events to update your system when a shipment is canceled.
-✅ **Multi-Channel Support** - Filter webhook data by **sales channel** to manage orders from different platforms separately.
+* ✅ **Real-time Order Tracking** - Receive `order_shipped` and `shipment_delivered` events to provide live tracking updates to customers.
+
+* ✅ **Inventory Management** - Monitor `shipment_exception` events to detect and respond to stock shortages.
+
+* ✅ **Automated Customer Notifications** - Trigger automated emails or SMS notifications when shipments are delayed (`shipment_onhold`) or delivered (`shipment_delivered`).
+
+* ✅ **Order Cancellation Handling** - Use `shipment_cancelled` events to update your system when a shipment is canceled.
+
+* ✅ **Multi-Channel Support** - Filter webhook data by **sales channel** to manage orders from different platforms separately.
 
 ***
 
@@ -111,9 +117,13 @@ ShipBob sends webhook notifications with the following headers:
 ## **Best Practices**
 
 ✅ **Use HTTPS** - Subscription URLs **must** support SSL. Use RequestBin for testing if needed.
+
 ✅ **Implement Redundancy** - Webhooks **may be delayed or lost**. Use `GET` endpoints to periodically reconcile data.
+
 ✅ **Retry Handling** - Events **may arrive out of order** due to retries—handle them as independent updates.
+
 ✅ **Use Idempotency** - Store webhook event `id`s and discard duplicates to prevent redundant processing.
+
 ✅ **Logging & Monitoring** - Log webhook requests and responses to diagnose issues.
 
 ***
@@ -122,32 +132,38 @@ ShipBob sends webhook notifications with the following headers:
 
 ### **Webhook Not Triggering?**
 
-🔹 Ensure your **subscription URL is correct** and **publicly accessible**.
-🔹 Confirm your app **returns a `2XX` response** to ShipBob’s `POST` request.
-🔹 Verify that your app **has the correct `webhooks_read` or `webhooks_write` permissions**.
+* 🔹 Ensure your **subscription URL is correct** and **publicly accessible**.
+
+* 🔹 Confirm your app **returns a `2XX` response** to ShipBob’s `POST` request.
+
+* 🔹 Verify that your app **has the correct `webhooks_read` or `webhooks_write` permissions**.
 
 ### **Webhook Retries Are Overloading My Server**
 
-🔹 Ensure your system **processes events efficiently** and responds within **5 seconds**.
-🔹 Return a `2XX` response **before** doing heavy processing.
+* 🔹 Ensure your system **processes events efficiently** and responds within **5 seconds**.
+
+* 🔹 Return a `2XX` response **before** doing heavy processing.
 
 ### **Webhook Data is Out of Order**
 
-🔹 Use timestamps from the payload to **sort events properly**.
-🔹 Handle events **individually**, rather than relying on strict order.
+* 🔹 Use timestamps from the payload to **sort events properly**.
+
+* 🔹 Handle events **individually**, rather than relying on strict order.
 
 ### **Receiving Duplicate Events?**
 
-🔹 Webhooks **are not guaranteed to be sent only once**.
-🔹 Implement **idempotency checks**: Store received event IDs and ignore duplicates.
+* 🔹 Webhooks **are not guaranteed to be sent only once**.
+
+* 🔹 Implement **idempotency checks**: Store received event IDs and ignore duplicates.
 
 ***
 
 ## **Summary**
 
-✅ **Webhooks provide real-time updates** without polling.
-✅ **Handle retries & unordered delivery** in your system.
-✅ **Use HTTPS & log webhook requests** for troubleshooting.
-✅ **Test thoroughly before deploying to production.**
+* ✅ **Webhooks provide real-time updates** without polling.
 
-For complete API details, visit our **Webhooks API Documentation**. 🚀
+* ✅ **Handle retries & unordered delivery** in your system.
+
+* ✅ **Use HTTPS & log webhook requests** for troubleshooting.
+
+* ✅ **Test thoroughly before deploying to production.**
