@@ -144,12 +144,10 @@
     "versions": [
       {
         "name": "stable",
-        "default": true,
-        "href": "openapi.json"
+        "default": true
       },
       {
-        "name": "experimental",
-        "href": "openapi-experimental.json"
+        "name": "experimental"
       }
     ]
   }
