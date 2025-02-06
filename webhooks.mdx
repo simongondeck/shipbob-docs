@@ -130,28 +130,30 @@ ShipBob sends webhook notifications with the following headers:
 
 ## **Troubleshooting Guide**
 
-### **Webhook Not Triggering?**
+<AccordionGroup>
+  <Accordion title="Webhook Not Triggering?" defaultOpen={false}>
+    * Ensure your **subscription URL is correct** and **publicly accessible**.
 
-🔹 Ensure your **subscription URL is correct** and **publicly accessible**.
+    * Confirm your app **returns a `2XX` response** to ShipBob’s `POST` request.
 
-🔹 Confirm your app **returns a `2XX` response** to ShipBob’s `POST` request.
+    * Verify that your app **has the correct `webhooks_read` or `webhooks_write` permissions**.
+  </Accordion>
 
-🔹 Verify that your app **has the correct `webhooks_read` or `webhooks_write` permissions**.
+  <Accordion title="Webhook Retries Are Overloading My Server" defaultOpen={false}>
+    * Ensure your system **processes events efficiently** and responds within **5 seconds**.
 
-### **Webhook Retries Are Overloading My Server**
+    * Return a `2XX` response **before** doing heavy processing.
+  </Accordion>
 
-* 🔹 Ensure your system **processes events efficiently** and responds within **5 seconds**.
+  <Accordion title="Webhook Data is Out of Order" defaultOpen={false}>
+    * Use timestamps from the payload to **sort events properly**.
 
-* 🔹 Return a `2XX` response **before** doing heavy processing.
+    * Handle events **individually**, rather than relying on strict order.
+  </Accordion>
 
-### **Webhook Data is Out of Order**
+  <Accordion title="Receiving Duplicate Events?" defaultOpen={false}>
+    * Webhooks **are not guaranteed to be sent only once**.
 
-* 🔹 Use timestamps from the payload to **sort events properly**.
-
-* 🔹 Handle events **individually**, rather than relying on strict order.
-
-### **Receiving Duplicate Events?**
-
-* 🔹 Webhooks **are not guaranteed to be sent only once**.
-
-* 🔹 Implement **idempotency checks**: Store received event IDs and ignore duplicates.
+    * Implement **idempotency checks**: Store received event IDs and ignore duplicates.
+  </Accordion>
+</AccordionGroup>
