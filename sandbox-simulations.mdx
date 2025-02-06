@@ -21,18 +21,22 @@ Before you can make requests to the ShipBob API, you will need to grab your API 
 <Steps>
   <Step title="Sign up for a sandbox account">
     Sign up for our SandBox environment, [here](https://webstage.shipbob.dev/app/merchant/#/SignUp).
-
-
   </Step>
 
   <Step title="Generate your API access token">
-    Choose which type of token you want to use.
 
-    * **Personal Access Token (PAT): Single-user:** A custom integration for 1 merchant using ShipBob. Generate this from the [Sandbox ShipBob dashboard](https://webstage.shipbob.dev/app/merchant/#/Integrations/token-management). For detailed steps, [click here](https://support.shipbob.com/s/article?articleName=API-Token-Generation-Personal-Access-Token).
 
-    * **OAuth: General purpose:** An application or integration that multiple merchants can use to connect to ShipBob. For example: a connector with Shopify. Send us the details [using this form](https://forms.office.com/r/AYx81v67MD).
+    <Accordion title="Choose which type of token you want to use." defaultOpen={false}>
+      * **Personal Access Token (PAT): Single-user:** A custom integration for 1 merchant using ShipBob. Generate this from the [Sandbox ShipBob dashboard](https://webstage.shipbob.dev/app/merchant/#/Integrations/token-management). For detailed steps, [click here](https://support.shipbob.com/s/article?articleName=API-Token-Generation-Personal-Access-Token).
 
-    **NOTE:** For detailed info about these tokens, [click here](https://developer.shipbob.com/auth).
+      * **OAuth: General purpose:** An application or integration that multiple merchants can use to connect to ShipBob. For example: a connector with Shopify. Send us the details [using this form](https://forms.office.com/r/AYx81v67MD).
+
+      <Info>
+        **NOTE**: For detailed info about these tokens, [click here](https://developer.shipbob.com/auth).
+      </Info>
+    </Accordion>
+
+
   </Step>
 
   <Step title="Point your API calls to the base URLs">
