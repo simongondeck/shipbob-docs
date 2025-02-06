@@ -2,562 +2,152 @@
 title: "Webhooks"
 ---
 
-ShipBob’s webhooks can simplify your development by pushing a payload to your app whenever certain events occur. Currently, the only way to subscribe to webhooks is through our Webhooks API (more details on the API documentation page).
+ShipBob webhooks automatically notify your app when key events occur, **eliminating the need for polling** and keeping your data in sync.
 
-This API has its own scopes - `webhooks_read` and `webhooks_write`, which you must request if you are using an OAuth application. Personal Access Tokens (PATs) will automatically be granted these scopes.
+## Getting Started
 
-* A **subscription** is a request for data to be sent to a URL specified by the developer of the application. Subscriptions belong to users. An application can have multiple subscriptions for 1 user, and can have multiple subscriptions to the same topic if they are different subscription URL.
+<Steps>
+  <Step title="Subscribe to webhooks">
+    Use the **Webhooks API** to subscribe to an event and define a **subscription URL**.
+  </Step>
+  <Step title="Receive Webhook Events">
+    When the event occurs, ShipBob sends a `POST` request to your **subscription URL** with relevant data.
+  </Step>
+  <Step title="Acknowledge Receipt">
+    Your system should return a `2XX` response to confirm successful receipt.
+  </Step>
+  <Step title="Handle Retries">
+    If no `2XX` response is received, ShipBob **retries delivery for up to 24 hours** using an **exponential backoff strategy**.
+  </Step>
+</Steps>
 
-* The **subscription URL** is the destination to which the payload will be POSTed upon the event happening for a given topic. Subscription URLs belong to the subscription, i.e. one application can have multiple subscriptions that have different subscription URLs.
 
-* An **event** is a trigger for the data for a given topic to be sent. For example - an action in the physical world like an order being shipped.
+***
 
-* A **topic** is a specific payload of data requested to be sent to the subscription URL. Applications can subscribe to multiple topics, or the same topic more than once.
+## **Key Concepts**
 
-* The **payload** is the data that is delivered.
+* **Subscription**: A request to receive webhook notifications at a specified URL.
 
-* The **response** is what the ShipBob webhooks API expects to receive after making a POST request to a subscription URL. 2XX responses are expected.
+* **Subscription URL**: The endpoint where webhook data is sent.
 
-Some webhooks topics are sensitive to **channel** - upon creating a subscription, you can specify which channel you’d like to receive data for. For example, if you have 2 sales channels creating orders but only want data sent for your Shopify channel #122233, you would pass through `"shipbob_channel_id": "122233"` in the header when POSTing your webhooks subscription.
+* **Event**: A trigger that generates webhook data (e.g., an order being shipped).
 
-![](/images/webhooks.png)
+* **Topic**: The category of event data being sent.
 
-## Best Practices & Troubleshooting
+* **Payload**: The actual event data sent in the webhook.
 
-* Subscription URLs must be SSL-encrypted. We recommend RequestBin if testing in an environment without SSL.
+* **Response**: A `2XX` HTTP response is required to confirm webhook receipt.
 
-* You should not solely rely on webhooks. We recommend using GET endpoints to periodically reconcile data.
+***
 
-* We do not allow editing of subscription URLs. Instead, you should delete the subscription, and create a new one.
+## **Common Use Cases**
 
-## Retry Policy
+✅ **Real-time Order Tracking** - Receive `order_shipped` and `shipment_delivered` events to provide live tracking updates to customers.
+✅ **Inventory Management** - Monitor `shipment_exception` events to detect and respond to stock shortages.
+✅ **Automated Customer Notifications** - Trigger automated emails or SMS notifications when shipments are delayed (`shipment_onhold`) or delivered (`shipment_delivered`).
+✅ **Order Cancellation Handling** - Use `shipment_cancelled` events to update your system when a shipment is canceled.
+✅ **Multi-Channel Support** - Filter webhook data by **sales channel** to manage orders from different platforms separately.
 
-With an exponential back-off, ShipBob attempts to deliver a given event to your webhook endpoint for up to 24 hours.
+***
 
-ShipBob doesn’t guarantee delivery of retried events in the order in which they’re generated. For example, creating an order might generate the following events:
+## **Webhook Topics & Events**
 
-* order\_shipped
+| **Topic**            | **Description**                                                                                                                         | **Scopes Required**                  |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `order_shipped`      | Fires when a shipping label is purchased, printed, and scanned. If the order is split into multiple shipments, this fires per shipment. | `orders_read`                        |
+| `shipment_delivered` | Fires when a shipment is delivered to the customer.                                                                                     | `orders_read` or `fulfillments_read` |
+| `shipment_exception` | Fires when a shipment is moved to exception status (e.g., out-of-stock items).                                                          | `orders_read` or `fulfillments_read` |
+| `shipment_onhold`    | Fires when a shipment moves to **On-Hold** status due to missing information (e.g., address issues).                                    | `orders_read` or `fulfillments_read` |
+| `shipment_cancelled` | Fires when a shipment is canceled. Does **not** fire for manually canceled or imported orders.                                          | `orders_read` or `fulfillments_read` |
 
-* shipment\_delivered
+***
 
-* shipment\_exception
+## **Webhook Headers**
 
-* shipment\_onhold
+ShipBob sends webhook notifications with the following headers:
 
-* shipment\_cancelled
+```json
+{
+  "shipbob-subscription-id": "1582",
+  "shipbob-topic": "order_shipped",
+  "content-type": "application/json; charset=utf-8"
+}
+```
 
-Your endpoint shouldn’t expect delivery of these events in this order in case of retries and would need to handle delivery accordingly.
+***
 
-## Topics
+## **Webhook Payloads (Example Responses)**
 
-| **Topic Name**      | **Description**                                                                                                                                                                                                                                                                                                      | **Scopes Required**                |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| order\_shipped      | Sends the full order payload when the label is purchased, printed, and placed on box for carrier pickup. While the tracking # will be available, there may be a delay while carriers scan in the package. If the order is split into multiple shipments, this will fire for each shipment that is part of the order. | orders\_read                       |
-| shipment\_delivered | Sends the full shipment payload when a shipment is delivered by the carrier to the customer. If the order is split into multiple shipments, this will fire for each shipment.                                                                                                                                        | orders\_read or fulfillments\_read |
-| shipment\_exception | Sends the full shipment payload when a shipment moves to exception status. Shipments are moved into exception because ShipBob is unable to fulfill the shipment. Shipments are moved into exception status largely because one or more items in the shipment is out of stock.                                        | orders\_read or fulfillments\_read |
-| shipment\_onhold    | Sends the full shipment payload when a shipment moves to On-Hold status. Shipments are moved into On-Hold status by ShipBob when we are missing key information like Address or Packaging preferences. Shipments can also be moved to On-Hold in the Merchant Dashboard. On-Hold Shipments will not be fulfilled.    | orders\_read or fulfillments\_read |
-| shipment\_cancelled | Sends the full shipment payload when a shipment moves to cancelled status. This webhook subcription will NOT notify you of cancelled split, copied, manual, and excel imported orders. This functionality will be available on this webhook at a later point.                                                        | orders\_read or fulfillments\_read |
-
-## Header
-
-The Topic and SubsciptionId are passed in the HTTP header of the webhook notification, with the names `shipbob-topic` and `shipbob-subscription-id`respectively.
-
-Example: order\_shipped topic
-
-Header:
-
-| Key                     | Value                           |
-| ----------------------- | ------------------------------- |
-| content-length          | 3                               |
-| content-type            | application/json; charset=utf-8 |
-| shipbob-subscription-id | 1582                            |
-| shipbob-topic           | order\_shipped                  |
-
-## Payload by Topic
-
-Unless specified in the table above, the webhook notification sends the full data model of the underlying resource, that is available in the GET endpoint.
-
-<AccordionGroup>
-  <Accordion title="Body sample for order_shipped topic:" defaultOpen={false}>
-    ```
+<Accordion>
+  <AccordionItem title="Order Shipped">
+    ```json
     {
       "id": 15949208,
-      "created_date": "2024-04-08T10:25:53.9009945+00:00",
-      "purchase_date": "2024-04-08T10:25:53.9009945+00:00",
-      "reference_id": "ORD-12348",
+      "created_date": "2024-04-08T10:25:53Z",
       "order_number": "ORD-12348",
       "status": "Processing",
-      "type": "DTC",
-      "channel": {
-        "id": 55176,
-        "name": "Privileged Access Token Thursday, February 9, 2023"
-      },
-      "shipping_method": "Standard",
       "recipient": {
-        "name": "John Doe co Wayne Enterprises",
+        "name": "John Doe",
         "address": {
           "address1": "123 Main St",
-          "address2": "Suite 100",
-          "company_name": "Wayne Enterprises",
           "city": "Anytown",
           "state": "NY",
           "country": "US",
           "zip_code": "12345"
-        },
-        "email": "john.doe@example.com",
-        "phone_number": "123-456-7890"
-      },
-      "products": [
-        {
-       "id": 4725516,
-          "reference_id": "TShirtBlueM",
-          "quantity": 4,
-          "quantity_unit_of_measure_code": "EA",
-          "sku": "TShirtBlueM",
-          "gtin": "string",
-          "upc": "string",
-          "unit_price": 0.1,
-          "external_line_id": 0
         }
-      ],
-      "tags": [
-        {
-          "name": "Handling instructions",
-          "value": "Fragile"
-        }
-      ],
-      "shipments": [
-        {
-          "id": 101199713,
-          "order_id": 15949208,
-          "reference_id": "ORD-12348",
-          "recipient": {
-            "name": "John Doe co Wayne Enterprises",
-            "full_name": "John Doe",
-            "address": {
-              "address1": "123 Main St",
-              "address2": "Suite 100",
-              "company_name": "Wayne Enterprises",
-              "city": "Anytown",
-              "state": "NY",
-              "country": "US",
-              "zip_code": "12345"
-            },
-            "email": "john.doe@example.com",
-            "phone_number": "123-456-7890"
-          },
-          "created_date": "2024-04-08T11:13:56.9924495+00:00",
-          "last_update_at": "2024-04-08T11:17:07.122+00:00",
-          "last_tracking_update_at": "2024-04-08T15:17:05+00:00",
-          "status": "LabeledCreated",
-          "status_details": [],
-          "location": {
-            "id": 10,
-            "name": "Moreno Valley (CA)"
-          },
-          "invoice_amount": 6.41,
-          "invoice_currency_code": "USD",
-          "insurance_value": null,
-          "ship_option": "Ground",
-          "package_material_type": "Box",
-          "tracking": {
-            "carrier": "OSMWorldwide",
-            "tracking_number": "9261290306529427911297",
-            "carrier_service": "ParcelSelect",
-            "tracking_url": "https://tools.usps.com/go/TrackConfirmAction!input.action?tRef=qt&tLc=0&tLabels=9261290306529427911297",
-            "bol": "string",
-            "shipping_date": null,
-            "pro_number": "string",
-            "scac": "string"
-          },
-          "products": [
-            {
-              "id": 4725516,
-              "reference_id": "TShirtBlueM",
-              "name": "Medium Blue T-Shirt",
-              "sku": "TShirtBlueM",
-              "inventory_items": [
-                {
-                  "id": 5264253,
-                  "name": "Medium Blue T-Shirt",
-                  "quantity": 4,
-                  "quantity_committed": 4,
-                  "lot": "22222",
-                  "expiration_date": "2024-08-24T14:15:22Z",
-                  "serial_numbers": [],
-                  "is_dangerous_goods": true
-                }
-              ]
-            }
-          ],
-          "parent_cartons": [],
-    		"measurements": {
-    		  "total_weight_oz": 5,
-    		  "length_in": 6,
-    		  "width_in": 5,
-    		  "depth_in": 4
-    		},
-          "require_signature": false,
-          "estimated_fulfillment_date": "2024-04-09T06:59:59+00:00",
-          "actual_fulfillment_date": "2024-04-08T11:17:07.122+00:00",
-          "estimated_fulfillment_date_status": "FulfilledOnTime",
-          "is_tracking_uploaded": false,
-          "gift_message": "test message",
-          "delivery_date": null
-        }
-      ],
-      "gift_message": null,
-      "shipping_terms": {
-        "carrier_type": null,
-        "payment_term": null
       },
-      "retailer_program_data": {
-        "purchase_order_number": null,
-        "retailer_program_type": null,
-        "mark_for_store": null,
-        "department": null,
-        "delivery_date": null,
-        "addresses": [],
-        "customer_ticket_number": null,
-        "ship_by_date": null,
-        "do_not_ship_before_date": null
-      },
-      "financials": {
-        "total_price": 5.85
-      }
-    }
-    ```
-  </Accordion>
-
-  <Accordion title="Body sample for shipment_delivered topic:" defaultOpen={false}>
-    ```
-    {
-      "id": 101199464,
-      "order_id": 15948959,
-      "reference_id": "ORD-12347",
-      "recipient": {
-        "name": "John Doe co Wayne Enterprises",
-        "full_name": "John Doe",
-        "address": {
-          "address1": "123 Main St",
-          "address2": "Suite 100",
-          "company_name": "Wayne Enterprises",
-          "city": "Anytown",
-          "state": "NY",
-          "country": "US",
-          "zip_code": "12345"
-        },
-        "email": "john.doe@example.com",
-        "phone_number": "123-456-7890"
-      },
-      "created_date": "2024-04-08T10:04:44.4414562+00:00",
-      "last_update_at": "2024-04-08T12:11:18.0516082+00:00",
-      "last_tracking_update_at": null,
-      "status": "Completed",
-      "status_details": [
-        {
-          "name": "Delivered",
-          "description": "Shipment Delivered",
-          "id": 203,
-          "inventory_id": null,
-          "exception_fulfillment_center_id": null,
-          "extra_information": null
-        }
-      ],
-      "location": {
-        "id": 10,
-        "name": "Moreno Valley (CA)"
-      },
-      "invoice_amount": 6.41,
-      "invoice_currency_code": "USD",
-      "insurance_value": null,
-      "ship_option": "Ground",
-      "package_material_type": "Box",
       "tracking": {
         "carrier": "OSMWorldwide",
         "tracking_number": "9261290306529427911297",
-        "carrier_service": "ParcelSelect",
-        "tracking_url": "https://tools.usps.com/go/TrackConfirmAction!input.action?tRef=qt&tLc=0&tLabels=9261290306529427911297",
-        "bol": null,
-        "shipping_date": null,
-        "pro_number": null,
-        "scac": null
-      },
-      "products": [
-    	{
-    	  "id": 4725516,
-    	  "reference_id": "TShirtBlueM",
-    	  "name": "Medium Blue T-Shirt",
-    	  "sku": "TShirtBlueM",
-    	  "inventory_items": [
-    		{
-    		  "id": 5264253,
-    		  "name": "Medium Blue T-Shirt",
-    		  "quantity": 4,
-    		  "quantity_committed": 4,
-    		  "lot": "22222",
-    		  "expiration_date": "2024-08-24T14:15:22Z",
-    		  "serial_numbers": [],
-    		  "is_dangerous_goods": false
-    		}
-    	  ]
-    	}
-      ],
-      "parent_cartons": [],
-      "measurements": {
-        "total_weight_oz": 5,
-        "length_in": 6,
-        "width_in": 5,
-        "depth_in": 4
-      },
-      "require_signature": false,
-      "estimated_fulfillment_date": "2024-04-09T06:59:59+00:00",
-      "actual_fulfillment_date": "2024-04-08T12:11:18.0516082+00:00",
-      "estimated_fulfillment_date_status": "FulfilledOnTime",
-      "is_tracking_uploaded": false,
-      "gift_message": "test message",
-      "delivery_date": null
+        "tracking_url": "https://tools.usps.com/go/TrackConfirmAction?tLabels=9261290306529427911297"
+      }
     }
     ```
-  </Accordion>
+  </AccordionItem>
+</Accordion>
 
-  <Accordion title="Body sample for shipment_onhold topic:" defaultOpen={false}>
-    ```
-    {
-      "id": 101198202,
-      "order_id": 15947699,
-      "reference_id": "ORD-1234",
-      "recipient": {
-        "name": "John Doe",
-        "full_name": "John Doe",
-        "address": {
-          "address1": "123 Main St",
-          "address2": "Suite 100",
-          "company_name": "Wayne Enterprises",
-          "city": "Anytown",
-          "state": "NY",
-          "country": "US",
-          "zip_code": "12345"
-        },
-        "email": "john.doe@example.com",
-        "phone_number": "123-456-7890"
-      },
-      "created_date": "2024-04-08T05:50:26.9451275+00:00",
-      "last_update_at": null,
-      "last_tracking_update_at": null,
-      "status": "OnHold",
-      "status_details": [
-        {
-          "name": "PackagePreferenceNotSet",
-          "description": "No Package Preference Set For Inventory",
-          "id": 407,
-          "inventory_id": 4309409,
-          "exception_fulfillment_center_id": null,
-          "extra_information": null
-        }
-      ],
-      "location": {
-        "id": 17,
-        "name": "Grapevine 2 (TX)"
-      },
-      "invoice_amount": 0,
-      "invoice_currency_code": "USD",
-      "insurance_value": 0,
-      "ship_option": "Ground",
-      "package_material_type": "Box",
-      "tracking": null,
-      "products": [
-        {
-          "id": 4725516,
-          "reference_id": "TShirtBlueM",
-          "name": "Medium Blue T-Shirt",
-          "sku": "TShirtBlueM",
-          "inventory_items": [
-            {
-              "id": 5264253,
-              "name": "Medium Blue T-Shirt",
-              "quantity": 1,
-              "quantity_committed": 0,
-              "lot": "22222",
-              "expiration_date": "2019-08-24T14:15:22Z",
-              "serial_numbers": [],
-              "is_dangerous_goods": false
-            }
-          ]
-        }
-      ],
-      "parent_cartons": [],
-      "measurements": {
-        "total_weight_oz": 5,
-        "length_in": 6,
-        "width_in": 5,
-        "depth_in": 4
-      },
-      "require_signature": false,
-      "estimated_fulfillment_date": null,
-      "actual_fulfillment_date": null,
-      "estimated_fulfillment_date_status": "AwaitingReset",
-      "is_tracking_uploaded": false,
-      "gift_message": "test message",
-      "delivery_date": null
-    }
-    ```
-  </Accordion>
+***
 
-  <Accordion title="Body sample for shipment_exception topic:" defaultOpen={false}>
-    ```
-    {
-      "id": 101198202,
-      "order_id": 15947699,
-      "reference_id": "ORD-1234",
-      "recipient": {
-        "name": "John Doe",
-        "full_name": "John Doe",
-        "address": {
-          "address1": "123 Main St",
-          "address2": "Suite 100",
-          "company_name": "Wayne Enterprises",
-          "city": "Anytown",
-          "state": "NY",
-          "country": "US",
-          "zip_code": "12345"
-        },
-        "email": "john.doe@example.com",
-        "phone_number": "123-456-7890"
-      },
-      "created_date": "2024-04-08T05:50:26.9451275+00:00",
-      "last_update_at": null,
-      "last_tracking_update_at": null,
-      "status": "Exception",
-      "status_details": [
-        {
-          "name": "OutOfStock",
-          "description": "No Stock On Hand For Sku",
-          "id": 303,
-          "inventory_id": 5264253,
-          "exception_fulfillment_center_id": 17,
-          "extra_information": null
-        }
-      ],
-      "location": {
-        "id": 17,
-        "name": "Grapevine 2 (TX)"
-      },
-      "invoice_amount": 0,
-      "invoice_currency_code": "USD",
-      "insurance_value": 0,
-      "ship_option": "Ground",
-      "package_material_type": "Box",
-      "tracking": null,
-      "products": [
-        {
-          "id": 4725516,
-          "reference_id": "TShirtBlueM",
-          "name": "Medium Blue T-Shirt",
-          "sku": "TShirtBlueM",
-          "inventory_items": [
-            {
-              "id": 5264253,
-              "name": "Medium Blue T-Shirt",
-              "quantity": 1,
-              "quantity_committed": 0,
-              "lot": "22222",
-              "expiration_date": "2019-08-24T14:15:22Z",
-              "serial_numbers": [],
-              "is_dangerous_goods": false
-            }
-          ]
-        }
-      ],
-      "parent_cartons": [],
-      "measurements": {
-        "total_weight_oz": 5,
-        "length_in": 6,
-        "width_in": 5,
-        "depth_in": 4
-      },
-      "require_signature": false,
-      "estimated_fulfillment_date": null,
-      "actual_fulfillment_date": null,
-      "estimated_fulfillment_date_status": "AwaitingReset",
-      "is_tracking_uploaded": false,
-      "gift_message": "test message",
-      "delivery_date": null
-    }
-    ```
-  </Accordion>
+## **Best Practices**
 
-  <Accordion title="Body sample for shipment_cancelled topic:" defaultOpen={false}>
-    ```
-    {
-      "id": 101198202,
-      "order_id": 15947699,
-      "reference_id": "ORD-1234",
-      "recipient": {
-        "name": "John Doe",
-        "full_name": "John Doe",
-        "address": {
-          "address1": "123 Main St",
-          "address2": "Suite 100",
-          "company_name": "Wayne Enterprises",
-          "city": "Anytown",
-          "state": "NY",
-          "country": "US",
-          "zip_code": "12345"
-        },
-        "email": "john.doe@example.com",
-        "phone_number": "123-456-7890"
-      },
-      "created_date": "2024-04-08T05:50:26.9451275+00:00",
-      "last_update_at": null,
-      "last_tracking_update_at": null,
-      "status": "Cancelled",
-      "status_details": [],
-      "location": {
-        "id": 17,
-        "name": "Grapevine 2 (TX)"
-      },
-      "invoice_amount": 0,
-      "invoice_currency_code": "USD",
-      "insurance_value": 0,
-      "ship_option": "Ground",
-      "package_material_type": "Box",
-      "tracking": null,
-      "products": [
-      {
-    	  "id": 4725516,
-    	  "reference_id": "TShirtBlueM",
-    	  "name": "Medium Blue T-Shirt",
-    	  "sku": "TShirtBlueM",
-    	  "inventory_items": [
-    		{
-    		  "id": 5264253,
-    		  "name": "Medium Blue T-Shirt",
-    		  "quantity": 4,
-    		  "quantity_committed": 0,
-    		  "lot": "22222",
-    		  "expiration_date": "2024-08-24T14:15:22Z",
-    		  "serial_numbers": [],
-    		  "is_dangerous_goods": true
-    		}
-    	  ]
-    	}
-      ],
-      "parent_cartons": [],
-      "measurements": {
-        "total_weight_oz": 6,
-        "length_in": 6,
-        "width_in": 5,
-        "depth_in": 4
-      },
-      "require_signature": false,
-      "estimated_fulfillment_date": null,
-      "actual_fulfillment_date": null,
-      "estimated_fulfillment_date_status": "Unavailable",
-      "is_tracking_uploaded": false,
-      "gift_message": "test message",
-      "delivery_date": null
-    }
-    ```
-  </Accordion>
-</AccordionGroup>
+✅ **Use HTTPS** - Subscription URLs **must** support SSL. Use RequestBin for testing if needed.
+✅ **Implement Redundancy** - Webhooks **may be delayed or lost**. Use `GET` endpoints to periodically reconcile data.
+✅ **Retry Handling** - Events **may arrive out of order** due to retries—handle them as independent updates.
+✅ **Use Idempotency** - Store webhook event `id`s and discard duplicates to prevent redundant processing.
+✅ **Logging & Monitoring** - Log webhook requests and responses to diagnose issues.
+
+***
+
+## **Troubleshooting Guide**
+
+### **Webhook Not Triggering?**
+
+🔹 Ensure your **subscription URL is correct** and **publicly accessible**.
+🔹 Confirm your app **returns a `2XX` response** to ShipBob’s `POST` request.
+🔹 Verify that your app **has the correct `webhooks_read` or `webhooks_write` permissions**.
+
+### **Webhook Retries Are Overloading My Server**
+
+🔹 Ensure your system **processes events efficiently** and responds within **5 seconds**.
+🔹 Return a `2XX` response **before** doing heavy processing.
+
+### **Webhook Data is Out of Order**
+
+🔹 Use timestamps from the payload to **sort events properly**.
+🔹 Handle events **individually**, rather than relying on strict order.
+
+### **Receiving Duplicate Events?**
+
+🔹 Webhooks **are not guaranteed to be sent only once**.
+🔹 Implement **idempotency checks**: Store received event IDs and ignore duplicates.
+
+***
+
+## **Summary**
+
+✅ **Webhooks provide real-time updates** without polling.
+✅ **Handle retries & unordered delivery** in your system.
+✅ **Use HTTPS & log webhook requests** for troubleshooting.
+✅ **Test thoroughly before deploying to production.**
+
+For complete API details, visit our **Webhooks API Documentation**. 🚀
