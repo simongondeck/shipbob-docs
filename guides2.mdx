@@ -1,0 +1,134 @@
+---
+title: "ShipBob API Guides"
+---
+
+# **ShipBob API Guides**  
+
+ShipBob’s public API enables a wide range of use cases. This guide walks you through the most common integration scenarios.
+
+## **Getting Started with ShipBob API**  
+
+To build an integration, you’ll primarily use the following API endpoints:
+
+### **1. Order Management**
+- **[Create an Order (POST)](https://developer.shipbob.com/api-docs/#tag/Orders/paths/~11.0~1order/post)** – Allows you to create orders in ShipBob.
+- **[Get Order Details (GET)](https://developer.shipbob.com/api-docs/#tag/Orders/paths/~11.0~1order/get)** – Fetches tracking details. For automated shipment updates, use [webhooks](https://developer.shipbob.com/api-docs/#tag/Webhooks).
+
+### **2. Inventory Management**
+- **[Get Inventory (GET)](https://developer.shipbob.com/api-docs/#tag/Inventory/paths/~11.0~1inventory~1%7BinventoryId%7D/get)** – Retrieves inventory levels across ShipBob’s facilities, including:
+  - **On Hand**: Total stock at the warehouse.
+  - **Fulfillable**: Available stock minus committed orders.
+  - **Sellable**: Fulfillable stock minus exceptions (only at a network-wide level).
+
+### **3. Authentication**
+Authentication is handled via **OAuth** or **Personal Access Tokens (PATs)**.
+
+- For custom integrations, PATs are preferred. You can generate them in the [ShipBob Dashboard](https://developer.shipbob.com/auth).
+- OAuth is required for multi-user integrations and marketplace apps.
+
+---
+
+## **Creating Direct-to-Consumer (D2C) Orders**  
+
+To successfully create an order using the **Order POST** endpoint, ensure you provide the required fields:
+
+<Steps>
+  <Step title="Specify Shipping Method">
+    Choose from "Standard", "Expedited", "2-Day", etc. Merchants map these to specific ShipBob shipping options.
+  </Step>
+  <Step title="Provide Recipient Details">
+    Include recipient name, Address1, City, and Country (ISO Alpha-2 recommended). Optionally, provide City and Zip Code.
+  </Step>
+  <Step title="Set a Reference ID">
+    This unique order number from your platform must be unique within the ShipBob account.
+  </Step>
+  <Step title="Include Products">
+    Pass product data using either **Reference ID Model** (recommended) or **Product ID Model**.
+  </Step>
+  <Step title="Set Order Tags (Optional)">
+    Tags can store extra metadata or trigger automation rules in ShipBob.
+  </Step>
+  <Step title="Include shipbob_channel_id">
+    Required in the request header. Retrieve via the [GET Channel](https://developer.shipbob.com/api-docs#tag/Channels/paths/~11.0~1channel/get) endpoint.
+  </Step>
+</Steps>
+
+For more details, refer to [ShipBob's Order API Documentation](https://developer.shipbob.com/api-docs/#tag/Orders/paths/~11.0~1order/post).
+
+---
+
+## **Retrieving Tracking & Fulfillment Details**
+
+### **Option 1: Polling API Approach**
+Use **[GET Orders](https://developer.shipbob.com/api-docs#tag/Orders/paths/~11.0~1order/get)** to retrieve tracking updates. 
+- Filter by `LastUpdateStartDate` and `LastUpdateEndDate` for efficient data sync.
+- Use `HasTracking=true` to fetch only shipped orders.
+
+### **Option 2: Webhooks (Recommended for Automation)**
+ShipBob provides webhooks for shipment events:
+- **Shipped**
+- **Delivered**
+- **Exception (e.g., out-of-stock issues)**
+- **On Hold (e.g., invalid address)**
+- **Cancelled**
+
+To subscribe, make a **[Webhook POST Request](https://developer.shipbob.com/api-docs#tag/Webhooks/paths/~11.0~1webhook/post)**.
+
+---
+
+## **Retrieving Inventory Levels**
+
+ShipBob’s **[GET Inventory](https://developer.shipbob.com/api-docs#tag/Inventory/paths/~11.0~1inventory/get)** endpoint provides inventory status.
+
+### **Option 1: Fetch Products Before Syncing Inventory**
+1. Retrieve all products using the **Product API**.
+2. Get product inventory IDs from the response.
+3. Use these IDs to fetch inventory levels via the **Inventory API**.
+
+### **Option 2: Store Inventory IDs Upstream**
+- Store ShipBob’s `inventory_id` for each product in your system.
+- Use this ID to fetch bulk inventory data efficiently.
+
+---
+
+## **Handling Warehouse Receiving Orders (WROs)**
+
+ShipBob allows Warehouse Receiving Orders (WROs) to be created via API.
+
+### **Relevant Endpoints:**
+- **[Create WRO](https://developer.shipbob.com/api-docs/#tag/Receiving/paths/~12.0~1receiving/post)**
+- **[Retrieve WRO Status](https://developer.shipbob.com/api-docs/#tag/Receiving/paths/~12.0~1receiving/get)**
+
+### **WRO Process:**
+
+1. Define `package_type`: **Pallet, Package, or FloorLoadedContainer**.
+2. Ensure an **expected arrival date** is in the future.
+3. Pass valid **ShipBob inventory_id** (fetch from **Product API** before sending WRO request).
+4. Use a **unique purchase_order_number**.
+5. Include scannable carton IDs for tracking.
+
+For more details, visit [ShipBob’s WRO API Documentation](https://developer.shipbob.com/api-docs/#tag/Receiving/paths/~12.0~1receiving/post).
+
+---
+
+## **Error Handling & Troubleshooting**
+
+| **Error Code** | **Meaning** | **Solution** |
+|--------------|------------|------------|
+| `400 Bad Request` | Missing required field | Ensure all fields are included |
+| `401 Unauthorized` | Invalid API token | Verify authentication headers |
+| `404 Not Found` | Invalid endpoint or ID | Check request parameters |
+| `429 Too Many Requests` | Rate limit exceeded | Implement exponential backoff |
+
+For additional troubleshooting, visit [ShipBob API Docs](https://developer.shipbob.com/).
+
+---
+
+## **Final Notes**
+
+✅ **Use PATs for single-user integrations, OAuth for multi-user apps.**  
+✅ **Subscribe to webhooks for automated tracking updates.**  
+✅ **Always include `shipbob_channel_id` in order requests.**  
+✅ **Handle rate limits with exponential backoff.**  
+
+For more details, check out our [API Documentation](https://developer.shipbob.com/). 🚀
