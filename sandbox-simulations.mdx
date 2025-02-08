@@ -14,18 +14,22 @@ Our Sandbox simulations allow merchants to test their integrations before they s
 
 These are APIs that can help you generate specific actions which are performed inside our ShipBob facility, where you can generate requests with data and get realistic responses that will happen in our facility. It is a fast and easy way of testing the integration even before it goes live. Thus, Simulation APIs let you identify any scenarios where your API can fail and allow you to better utilize these APIs by fixing those issues.
 
-Before you can make requests to the ShipBob API, you will need to grab your API key from your dashboard. You find it under Settings » API.
+Before you can make requests to the ShipBob API, you will need to grab your API key from your dashboard. You find it under Settings » API .
 
 ## How to get started with Simulation APIs?
 
 <Steps>
   <Step title="Sign up for a sandbox account">
     Sign up for our SandBox environment, [here](https://webstage.shipbob.dev/app/merchant/#/SignUp).
+
+    <Note>
+      **NOTE**: Your data from the production environment will NOT be copied over; it is a clean environment.
+    </Note>
+
+
   </Step>
 
   <Step title="Generate your API access token">
-
-
     <Accordion title="Choose which type of token you want to use." defaultOpen={false}>
       * **Personal Access Token (PAT): Single-user:** A custom integration for 1 merchant using ShipBob. Generate this from the [Sandbox ShipBob dashboard](https://webstage.shipbob.dev/app/merchant/#/Integrations/token-management). For detailed steps, [click here](https://support.shipbob.com/s/article?articleName=API-Token-Generation-Personal-Access-Token).
 
@@ -35,8 +39,6 @@ Before you can make requests to the ShipBob API, you will need to grab your API 
         **NOTE**: For detailed info about these tokens, [click here](https://developer.shipbob.com/auth).
       </Info>
     </Accordion>
-
-
   </Step>
 
   <Step title="Point your API calls to the base URLs">
@@ -50,23 +52,51 @@ Before you can make requests to the ShipBob API, you will need to grab your API 
 
 ##
 
-1. Sign up for our SandBox environment, [here](https://webstage.shipbob.dev/app/merchant/#/SignUp).
+1. Sign up for our SandBox environment, 
+
+   [here](https://webstage.shipbob.dev/app/merchant/#/SignUp)
+
+   .
 
 > **NOTE:** Your data from the production environment will NOT be copied over; it is a clean environment.
 
 1. Generate your API access token. Choose which type of token you want to use.
 
-   * **Personal Access Token (PAT): Single-user:** A custom integration for 1 merchant using ShipBob. Generate this from the [Sandbox ShipBob dashboard](https://webstage.shipbob.dev/app/merchant/#/Integrations/token-management). For detailed steps, [click here](https://support.shipbob.com/s/article?articleName=API-Token-Generation-Personal-Access-Token).
+   * **Personal Access Token (PAT): Single-user:**
 
-   * **OAuth: General purpose:** An application or integration that multiple merchants can use to connect to ShipBob. For example: a connector with Shopify. Send us the details [using this form](https://forms.office.com/r/AYx81v67MD).
+      A custom integration for 1 merchant using ShipBob. Generate this from the 
+
+     [Sandbox ShipBob dashboard](https://webstage.shipbob.dev/app/merchant/#/Integrations/token-management)
+
+     . For detailed steps, 
+
+     [click here](https://support.shipbob.com/s/article?articleName=API-Token-Generation-Personal-Access-Token)
+
+     .
+
+   * **OAuth: General purpose:**
+
+      An application or integration that multiple merchants can use to connect to ShipBob. For example: a connector with Shopify. Send us the details 
+
+     [using this form](https://forms.office.com/r/AYx81v67MD)
+
+     .
 
 > **NOTE:** For detailed info about these tokens, [click here](https://developer.shipbob.com/auth).
 
 1. Point all your API calls to the below base URLs for each endpoint:
 
-   * **For Sandbox API**: [https://sandbox-api.shipbob.com/](https://sandbox-api.shipbob.com/)
+   * **For Sandbox API**
 
-   * **For Sandbox Auth**: [https://authstage.shipbob.com/](https://authstage.shipbob.com/)
+     : 
+
+     [https://sandbox-api.shipbob.com/](https://sandbox-api.shipbob.com/)
+
+   * **For Sandbox Auth**
+
+     : 
+
+     [https://authstage.shipbob.com/](https://authstage.shipbob.com/)
 
 ## FAQ
 
@@ -78,14 +108,26 @@ Before you can make requests to the ShipBob API, you will need to grab your API 
   </Accordion>
 
   <Accordion title="Can I simulate an order in any state?">
-    No, orders which are in On-Hold, Exception, or Cancelled status cannot be simulated.
+    No, orders which are in `OnHold`, `Exception`, or `Cancelled` status cannot be simulated.
   </Accordion>
 
   <Accordion title="Can I simulate multiple actions?">
     Yes, you can simulate multiple actions in one request.
   </Accordion>
 
-  <Accordion title="Can I simulate multiple actions?">
-    Yes, you can simulate multiple actions in one request.
+  <Accordion title="Can I simulate a production environment?">
+    No, the simulation will work on our SandBox Environment.
+  </Accordion>
+
+  <Accordion title="Can I simulate the Shipped/Delivered status if I do not have inventory?" defaultOpen={false}>
+    No, you need to add inventory before running the simulation.
+  </Accordion>
+
+  <Accordion title="What is the maximum level of nesting of Actions for a simulation?" defaultOpen={false}>
+    Maximum 5 nested actions, nesting of more actions will be skipped.
+  </Accordion>
+
+  <Accordion title="What happens if I pass a delay of more than 2 days (2880 minutes)?" defaultOpen={false}>
+    System will set a delay of 2880 minutes, so your request will be automatically processed after 2880 minutes.
   </Accordion>
 </AccordionGroup>
