@@ -12,23 +12,19 @@ description: 'Stay updated with the latest improvements, bug fixes, and new feat
 <Update label="December 2024">
   ### 🚀 New Features
 
-  * Introduced the
+  Introduced the`PUT 1.0/shipment`endpoint to indicate when tracking information has been uploaded. Use this endpoint to acknowledge that tracking details have been successfully synced to your system. Here is example use case:
+
+  * Poll orders with tracking using
+
+    `GET 1.0/order?HasTracking=true&IsTrackingUploaded=false`
+
+    to retrieve orders where tracking has been provided but not yet confirmed as uploaded.
+
+  * Once tracking is uploaded, call the
 
     `PUT 1.0/shipment`
 
-    endpoint to indicate when tracking information has been uploaded. Use this endpoint to acknowledge that tracking details have been successfully synced to your system. Example:
-
-    * Poll orders with tracking using
-
-      `GET 1.0/order?HasTracking=true&IsTrackingUploaded=false`
-
-      to retrieve orders where tracking has been provided but not yet confirmed as uploaded.
-
-    * Once tracking is uploaded, call the
-
-      `PUT 1.0/shipment`
-
-      endpoint to mark it as uploaded.
+    endpoint to mark it as uploaded.
 </Update>
 
 <Update label="March 2024">
