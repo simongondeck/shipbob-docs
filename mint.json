@@ -38,7 +38,6 @@
             "pages": [
                 {
                     "group": "Channels",
-                    "version": "experimental",
                     "pages": [
                       "api-reference/channels/get-user-authorized-channel-info"
                     ]
@@ -86,6 +85,7 @@
                 },
                 {
                   "group": "Receiving",
+                  "version": "2.0",
                   "pages": [
                     "api-reference/receiving/get-fulfillment-centers",
                     "api-reference/receiving/get-warehouse-receiving-order",
@@ -94,6 +94,18 @@
                     "api-reference/receiving/create-warehouse-receiving-order",
                     "api-reference/receiving/get-warehouse-receiving-order-box-labels",
                     "api-reference/receiving/cancel-warehouse-receiving-order",
+                    "api-reference/receiving/get-warehouse-receiving-order-deprecated",
+                    "api-reference/receiving/get-a-warehouse-receiving-order-by-purchase-order-number-deprecated",
+                    "api-reference/receiving/create-warehouse-receiving-order-deprecated",
+                    "api-reference/receiving/get-warehouse-receiving-order-box-labels-deprecated",
+                    "api-reference/receiving/cancel-warehouse-receiving-order-deprecated"
+                  ]
+                },
+                {
+                  "group": "Receiving",
+                  "version": "1.0",
+                  "pages": [
+                    "api-reference/receiving/get-fulfillment-centers",
                     "api-reference/receiving/get-warehouse-receiving-order-deprecated",
                     "api-reference/receiving/get-a-warehouse-receiving-order-by-purchase-order-number-deprecated",
                     "api-reference/receiving/create-warehouse-receiving-order-deprecated",
@@ -143,11 +155,14 @@
     "theme": "venus",
     "versions": [
       {
-        "name": "stable",
+        "name": "experimental"
+      },
+      {
+        "name": "2.0",
         "default": true
       },
       {
-        "name": "experimental"
+        "name": "1.0"
       }
     ]
   }
