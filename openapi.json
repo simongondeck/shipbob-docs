@@ -11,7 +11,7 @@
           "tags": [
             "Channels"
           ],
-          "summary": "Get user-authorized channel info",
+          "summary": "Get channel",
           "responses": {
             "200": {
               "description": "Success",
