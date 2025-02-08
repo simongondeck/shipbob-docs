@@ -6,12 +6,13 @@
     },
     "favicon": "/favicon.png",
     "background": {
-      "style": "windows"
+      "style": "windows",
+      "dark": "#175cff"
     },
     "colors": {
       "primary": "#175cff",
       "light": "#457CFE",
-      "dark": "#2E6CFF"
+      "dark": "#175cff"
     },
     "codeBlock": {
       "mode": "auto"
