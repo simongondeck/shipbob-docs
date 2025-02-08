@@ -3,96 +3,156 @@ title: 'Release Notes'
 description: 'Stay updated with the latest improvements, bug fixes, and new features.'
 ---
 
+<Update label="February 2025">
+  ### 📘 Documentation
+
+  * Launched new API docs
+</Update>
+
+<Update label="December 2024">
+  ### 🚀 New Features
+
+  * Introduced the
+
+    `PUT 1.0/shipment`
+
+    endpoint to indicate when tracking information has been uploaded. Use this endpoint to acknowledge that tracking details have been successfully synced to your system. Example:
+
+    * Poll orders with tracking using
+
+      `GET 1.0/order?HasTracking=true&IsTrackingUploaded=false`
+
+      to retrieve orders where tracking has been provided but not yet confirmed as uploaded.
+
+    * Once tracking is uploaded, call the
+
+      `PUT 1.0/shipment`
+
+      endpoint to mark it as uploaded.
+</Update>
+
 <Update label="March 2024">
   ### 🚀 New Features
-  - Introduced a new section for API Guides.
+
+  * Introduced a new section for API Guides.
 
   ### 🛠 Improvements
-  - Implemented retry logic for Webhooks to enhance resilience. Failed webhooks are now retried over 24 hours with an exponential backoff strategy to increase delivery success rates.
+
+  * Implemented retry logic for Webhooks to enhance resilience. Failed webhooks are now retried over 24 hours with an exponential backoff strategy to increase delivery success rates.
 </Update>
 
 <Update label="February 2023">
   ### 🚀 New Features
-  - Enabled self-service generation of Auth Tokens (Personal Access Tokens) directly from the ShipBob dashboard.
+
+  * Enabled self-service generation of Auth Tokens (Personal Access Tokens) directly from the ShipBob dashboard.
 </Update>
 
 <Update label="November 2022">
   ### 🛠 Improvements
-  - Added `GET 2.0/simulate/status/{simulation_id}` endpoint in the Sandbox Environment to fetch the status of a registered simulation.
+
+  * Added `GET 2.0/simulate/status/{simulation_id}` endpoint in the Sandbox Environment to fetch the status of a registered simulation.
 </Update>
 
 <Update label="October 2022">
   ### 🚀 New Features
-  - Introduced `POST 2.0/simulate/shipment` endpoint in the Sandbox Environment to request simulation for processing a shipment to 'Shipped' and 'Delivered' statuses.
+
+  * Introduced `POST 2.0/simulate/shipment` endpoint in the Sandbox Environment to request simulation for processing a shipment to 'Shipped' and 'Delivered' statuses.
 </Update>
 
 <Update label="August 2022">
   ### 🚀 New Features
-  - Added `GET 2.0/receiving` endpoint to request multiple Warehouse Receiving Orders (WROs), supporting various query parameters like fulfillment center ID and WRO insert date.
+
+  * Added `GET 2.0/receiving` endpoint to request multiple Warehouse Receiving Orders (WROs), supporting various query parameters like fulfillment center ID and WRO insert date.
 
   ### ⚠️ Deprecations
-  - Deprecated `1.0/receiving` endpoints. Users are encouraged to migrate to `2.0/receiving`. Note: The models returned by `2.0/receiving` will no longer contain box info; this will be moved to a separate endpoint before `/receiving` is removed permanently.
+
+  * Deprecated `1.0/receiving` endpoints. Users are encouraged to migrate to `2.0/receiving`. Note: The models returned by `2.0/receiving` will no longer contain box info; this will be moved to a separate endpoint before `/receiving` is removed permanently.
 </Update>
 
 <Update label="April 2022">
   ### 🛠 Improvements
-  - Added `purchase_order_number` attribute to the Receiving API's request and response structures.
+
+  * Added `purchase_order_number` attribute to the Receiving API's request and response structures.
 </Update>
 
 <Update label="May 2021">
   ### 🛠 Improvements
-  - Introduced `total_sellable_quantity` attribute to Inventory API endpoints, calculated by subtracting the total exception quantity from the fulfillable quantity.
+
+  * Introduced `total_sellable_quantity` attribute to Inventory API endpoints, calculated by subtracting the total exception quantity from the fulfillable quantity.
 </Update>
 
 <Update label="March 2020">
   ### 🚀 New Features
-  - Enabled auto-creation of Products when sending Orders that use the product `reference_id`.
-  - Added a new authentication method - Personal Access Token (PAT) - for single-merchant applications.
+
+  * Enabled auto-creation of Products when sending Orders that use the product `reference_id`.
+
+  * Added a new authentication method - Personal Access Token (PAT) - for single-merchant applications.
 
   ### 📘 Documentation
-  - Updated 'Getting Started' section for clearer guidance on API usage.
-  - Added an example integration diagram to the Tools section.
+
+  * Updated 'Getting Started' section for clearer guidance on API usage.
+
+  * Added an example integration diagram to the Tools section.
 </Update>
 
 <Update label="February 2020">
   ### 🛠 Improvements
-  - Added 'On Hand' and 'Committed' quantity calculations to the Inventory Resource.
-  - Moved the Shipments endpoints under the Orders API resource, ensuring no interruptions of service.
-  - Added Shipment information to the 'Get Order' and 'Get Orders' endpoints.
+
+  * Added 'On Hand' and 'Committed' quantity calculations to the Inventory Resource.
+
+  * Moved the Shipments endpoints under the Orders API resource, ensuring no interruptions of service.
+
+  * Added Shipment information to the 'Get Order' and 'Get Orders' endpoints.
 </Update>
 
 <Update label="January 2020">
   ### 🚀 New Features
-  - Introduced the Returns API, including endpoints to create, edit, cancel, and retrieve returns.
-  - Added `referenceId` field as a filter to the 'Get Orders' endpoint.
+
+  * Introduced the Returns API, including endpoints to create, edit, cancel, and retrieve returns.
+
+  * Added `referenceId` field as a filter to the 'Get Orders' endpoint.
 </Update>
 
 <Update label="December 2019">
   ### 🚀 New Features
-  - Enabled developers to request multi-channel applications with read-only access to all of a user's channels.
+
+  * Enabled developers to request multi-channel applications with read-only access to all of a user's channels.
 
   ### 🛠 Improvements
-  - Added `packaging_attribute` field to Inventory API endpoints.
-  - Fixed issue with missing inventory items in Bulk POST Products response.
-  - Added 'Cancel Warehouse Receiving Order' endpoint.
-  - Fixed incorrect `Next-Page` headers returned by endpoints with multiple pages.
-  - Added company name to recipient info in Orders endpoints.
-  - Added packaging type to Shipments endpoints.
-  - Fixed bug where Shipments endpoints did not return more than one lot date and lot number for inventory.
+
+  * Added `packaging_attribute` field to Inventory API endpoints.
+
+  * Fixed issue with missing inventory items in Bulk POST Products response.
+
+  * Added 'Cancel Warehouse Receiving Order' endpoint.
+
+  * Fixed incorrect `Next-Page` headers returned by endpoints with multiple pages.
+
+  * Added company name to recipient info in Orders endpoints.
+
+  * Added packaging type to Shipments endpoints.
+
+  * Fixed bug where Shipments endpoints did not return more than one lot date and lot number for inventory.
 </Update>
 
 <Update label="November 2019">
   ### 🛠 Improvements
-  - Added 'Company Name' to the shipment object in the Fulfillment API.
-  - Introduced an additional 'On Hold' status reason - "Missing Packaging Preferences". Merchants should resolve this by logging into their ShipBob account.
+
+  * Added 'Company Name' to the shipment object in the Fulfillment API.
+
+  * Introduced an additional 'On Hold' status reason - "Missing Packaging Preferences". Merchants should resolve this by logging into their ShipBob account.
 
   ### 🚀 New Features
-  - Released Warehouse Receiving API for creating orders to receive inventory into ShipBob’s fulfillment center.
+
+  * Released Warehouse Receiving API for creating orders to receive inventory into ShipBob’s fulfillment center.
 
   ### 📘 Documentation
-  - Fixed inconsistencies and combined all APIs into a single document.
-  - Introduced new endpoints for 'GET Timeline Logs For One Shipment' and 'GET Timeline Logs For One Shipment Without Order'.
+
+  * Fixed inconsistencies and combined all APIs into a single document.
+
+  * Introduced new endpoints for 'GET Timeline Logs For One Shipment' and 'GET Timeline Logs For One Shipment Without Order'.
 
   ### 🛠 Improvements
-  - Shipments with 'On Hold' status for missing tariff information now display the inventory ID causing the hold.
+
+  * Shipments with 'On Hold' status for missing tariff information now display the inventory ID causing the hold.
 </Update>
