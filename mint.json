@@ -31,7 +31,7 @@
                 "auth",
                 "webhooks",
                 "sandbox-simulations",
-                "tools"
+                "rate-limit"
             ]
         },
         {
