@@ -3,6 +3,55 @@ title: "API Quick Start"
 description: "This quickstart guide intends to walk you through a few common scenarios to let you understand how to use the ShipBob API."
 ---
 
+<Steps>
+  <Step title="Get API key">
+    On the ShipBob dashboard, go to Integrations > API Tokens. Click Generate New Token. Copy this token as we will use in next step. If you do not have a ShipBob account yet, you can create a sandbox account by following [this link](https://webstage.shipbob.dev/app/merchant/#/SignUp) or generate on your production account.
+  </Step>
+
+  <Step title="Make your first API request">
+    Use your PAT token to make a request to the GET Channels endpoint. You will need the channel ID to create products, orders and returns with the ShipBob API.
+
+    ```
+    GET https://api.shipbob.com/1.0/channel
+
+    Headers
+    - Authorization: Bearer {insert token}
+    ```
+  </Step>
+
+  <Step title="Create a product">
+    * Create a product using the 
+
+      `POST 1.0/product`
+
+       endpoint. 
+
+    * Make sure to pass the 
+
+      `shipbob_channel_id`
+
+       in the header.
+
+    Here is a sample request:
+
+    ```
+    {
+      "reference_id": "TShirtBlueM",
+      "sku": "TShirtBlueM",
+      "name": "Medium Blue T-Shirt"
+    }
+    ```
+
+
+
+
+
+
+
+    <CodeGroup />
+  </Step>
+</Steps>
+
 ## 1. Get API key
 
 ShipBob verifies a user's request by adding an as-api-key in the header.
