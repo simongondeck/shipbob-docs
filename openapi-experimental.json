@@ -9,7 +9,7 @@
         "/experimental/channel": {
             "get": {
                 "tags": [
-                    "Channels"
+                    "ChannelsExp"
                 ],
                 "summary": "Get user-authorized channel info",
                 "responses": {
